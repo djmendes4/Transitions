@@ -1,0 +1,89 @@
+input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+#title {
+	width: 80%;
+	margin: 0px auto;
+	height: 100px;
+	position: absolute;
+	left: 10%;
+	top: -8px;
+	border-radius: 8px;
+	background-color: rgba(19, 25, 37, 1);
+	box-shadow: 0px 0px 6px 2px rgba(0, 0, 0, 0.5), 0px 0px 16px -2px rgba(119, 125, 138, 0.2) inset;
+	border: 1px solid black;
+}
+
+#settings-Menu {
+	width: 80%;
+	height: 200px;
+	background-color: rgba(19, 25, 37, 1);
+	border-radius: 8px;
+	margin: 0px auto;
+	position: absolute;
+	left:10%;
+	bottom: -8px;
+	box-shadow: 0px 0px 6px 2px rgba(0, 0, 0, 0.5), 0px 0px 16px -2px rgba(119, 125, 138, 0.2) inset;
+	border: 1px solid black;
+	transition: all ease-out 0.6s;
+}
+
+#settings-toggle {
+	background-color: white;
+	background: url(../assets/arrow.png) center bottom 2px no-repeat;
+	background-size: 36%;
+	width: 8%;
+	height: 24px;
+	position: absolute;
+	left: 46%;
+	bottom: -12px;
+	border-radius: 8px;
+	border: 1px solid black;
+	background-color: rgba(19, 25, 37, 1);
+	box-shadow: 0px 0px 6px 2px rgba(0, 0, 0, 0.5), 0px 0px 8px 0px rgba(75, 81, 93, 0.2) inset;
+	opacity: 1.0;
+	transition: opacity ease-out 0.6s;
+}
+
+#settings-toggle[tempt] {
+	background-color: rgba(8, 13, 27, 1);
+	box-shadow: 0px 0px 6px 2px rgba(0, 0, 0, 0.5), 0px 0px 8px 0px rgba(75, 81, 93, 0.2) inset;
+	transition: all ease-out 0.16s;
+}
+
+#settings-toggle[state="1"] {
+	visibility: hidden;
+	opacity: 0;
+	transition: all ease-out 0.6s;
+}
+
+#settings-toggle[state="2"] {
+	top: 6px;
+	opacity: 1.0;
+	transition: opacity ease-out 0.6s;
+	transform: scaleY(-1);
+	background-position: center bottom 7px;
+}
+
+#settings-toggle[state="3"] {
+	visibility: hidden;
+	opacity: 0;
+	transform: scaleY(-1);
+	background-position: center bottom 7px;
+	top:6px;
+	transition: all ease-out 0.6s;
+}
+
+#settings-Menu[tempt] {
+	box-shadow: 0px 0px 6px 2px rgba(0, 0, 0, 0.5), 0px 0px 12px 0px rgba(75, 81, 93, 0.5) inset;
+	bottom: -16px;
+	transition: all ease-out 0.16s;
+}
+
+#settings-Menu[lowered] {
+	box-shadow: 0px 0px 6px 2px rgba(0, 0, 0, 0.5), 0px 0px 12px 0px rgba(75, 81, 93, 0.2) inset;
+	bottom: -187px;
+	transition: all ease-out 0.5s;
+}
