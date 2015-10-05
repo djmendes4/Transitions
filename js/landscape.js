@@ -19,10 +19,12 @@ var Landscape = function () {
 		//console.log('Landscape Attributes:' + '\n\tSection ID:\t\t\tlandscape' + '\n\tWidth:\t\t\t\t' + this.width + 'px\n\tHeight:\t\t\t\t' + this.height + 'px\n\tBorder Width:\t\t' + this.borderWidth + 'px');
 
 		this.cells = [];
-		this.cellSize = 12;
+		this.cellWidth = 12;
+		this.cellHeight = 12;
 		this.cellBorderWidth = 1;
-		this.columns = Math.ceil(this.width / (this.cellSize + this.cellBorderWidth));
-		this.rows = Math.floor(this.height / (this.cellSize + this.cellBorderWidth));
+		this.cellBorderRadius = 0;
+		this.columns = Math.ceil(this.width / (this.cellWidth + this.cellBorderWidth));
+		this.rows = Math.floor(this.height / (this.cellHeight + this.cellBorderWidth));
 		//console.log('Cell Attributes:' + '\n\tSize:\t\t\t\t' + this.cellSize + 'px\n\tBorder Width:\t\t' + this.cellBorderWidth + 'px\n\tColumns:\t\t\t' + this.columns + '\n\tRows:\t\t\t\t' + this.rows);
 
 		this.cellTones = ['t0', 't1', 't2', 't3', 't4'];
@@ -40,8 +42,10 @@ var Landscape = function () {
 			newStyle = document.createElement('style'),
 			fragment = document.createDocumentFragment();
 
-		centerWidth = Math.floor(((this.columns * (this.cellSize + this.cellBorderWidth) + this.cellBorderWidth) - (this.width)) / 2);
-		centerHeight = (this.cellSize + this.cellBorderWidth) * this.rows - this.cellBorderWidth;
+		centerWidth = Math.ceil(((this.columns * (this.cellWidth + this.cellBorderWidth) + this.cellBorderWidth) - (this.width)) / 2);
+		centerHeight = (this.cellHeight + this.cellBorderWidth) * this.rows - this.cellBorderWidth;
+
+		console.log(centerWidth);
 
 		for (x = 0; x < this.columns; x += 1) {
 			this.cells[x] = [];
@@ -51,8 +55,8 @@ var Landscape = function () {
 				newDiv = document.createElement('div');
 				newDiv.setAttribute('id', x + ',' + y);
 				newDiv.setAttribute('class', 'cell ' + this.cellTones[colorTone]);
-				newDiv.style.left = (x * (this.cellSize + this.cellBorderWidth) - centerWidth) + 'px';
-				newDiv.style.top = (y * (this.cellSize + this.cellBorderWidth) - this.cellBorderWidth) + 'px';
+				newDiv.style.left = (x * (this.cellWidth + this.cellBorderWidth) - centerWidth) + 'px';
+				newDiv.style.top = (y * (this.cellHeight + this.cellBorderWidth) - this.cellBorderWidth) + 'px';
 
 				fragment.appendChild(newDiv);
 
@@ -61,18 +65,90 @@ var Landscape = function () {
 		}
 
 		newStyle.type = 'text/css';
-		style = '\n.cell {\n\twidth: ' + this.cellSize + 'px;\n\theight: ' + this.cellSize + 'px;\n\tborder-width: ' + this.cellBorderWidth + 'px;\n}\n';
-		style += '#landscape {\n\theight: ' + centerHeight + 'px;\n\tborder-width: ' + this.borderWidth + 'px 0px;\n}\n';
+		newStyle.setAttribute('id', 'landscape-css');
+		style = '\n.cell {\n\twidth: ' + this.cellWidth + 'px;\n\theight: ' + this.cellHeight + 'px;\n\tborder-width: ' + this.cellBorderWidth + 'px;\n\tborder-radius: ' + this.cellBorderRadius + 'px;\n}\n';
+		style += '#landscape {\n\theight: ' + centerHeight + 'px;\n\tborder-width: ' + this.borderWidth + 'px;\n\twidth: ' + this.width + 'px;\n}\n';
 
 		if (newStyle.styleSheet) {
 			newStyle.styleSheet.cssText = style;
 		} else {
+			if (document.getElementById('landscape-css')) {
+				document.getElementsByTagName('head')[0].removeChild(document.getElementById('landscape-css'));
+			}
 			newStyle.appendChild(document.createTextNode(style));
 		}
 
 		document.getElementsByTagName('head')[0].appendChild(newStyle);
+		this.landscape.innerHTML = '';
 		this.landscape.appendChild(fragment);
 	};
+
+	this.setLandscapeWidth = function (event) {
+		var width = Number(event.target.value);
+
+		this.width = width;
+		this.columns = Math.ceil(this.width / (this.cellWidth + this.cellBorderWidth));
+		console.log('Landscape Width: ' + this.width + '\n' + 'Columns: ' + this.columns);
+
+		this.createGrid();
+	}.bind(this);
+
+	this.setLandscapeHeight = function (event) {
+		var height = Number(event.target.value);
+
+		this.height = height;
+		this.rows = Math.floor(this.height / (this.cellHeight + this.cellBorderWidth));
+		console.log('Landscape Height: ' + this.height + '\n' + 'Rows: ' + this.rows);
+
+		this.createGrid();
+	}.bind(this);
+
+	this.setBorderWidth = function (event) {
+		var width = event.target.value;
+
+		this.borderWidth = width;
+		console.log('Landscape Border Thickness: ' + this.borderWidth);
+
+		this.createGrid();
+	}.bind(this);
+
+	this.setCellWidth = function (event) {
+		var width = Number(event.target.value);
+
+		this.cellWidth = width;
+		console.log('Cell Width: ' + this.cellWidth);
+
+		this.columns = Math.ceil(this.width / (this.cellWidth + this.cellBorderWidth));
+		this.createGrid();
+	}.bind(this);
+
+	this.setCellHeight = function (event) {
+		var height = Number(event.target.value);
+
+		this.cellHeight = height;
+		console.log('Cell Height: ' + this.cellHeight);
+
+		this.rows = Math.floor(this.height / (this.cellHeight + this.cellBorderWidth));
+		this.createGrid();
+	}.bind(this);
+
+	this.setCellBorderWidth = function (event) {
+		var width = Number(event.target.value);
+
+		this.cellBorderWidth = width;
+		console.log('Cell Border Width: ' + this.cellBorderWidth);
+
+		this.createGrid();
+	}.bind(this);
+
+	this.setCellBorderRadius = function (event) {
+		var radius = Number(event.target.value);
+
+		this.cellBorderRadius = radius;
+		console.log('Cell Border Radius: ' + this.cellBorderRadius);
+
+		this.createGrid();
+	}.bind(this);
 
 	this.main();
 };
@@ -80,10 +156,10 @@ var Landscape = function () {
 var Transition = function () {
 	'use strict';
 
-	this.initialize = function (landscape) {
-		this.columns = landscape.columns;
-		this.rows = landscape.rows;
-		this.cells = landscape.cells;
+	this.initialize = function () {
+		this.columns = window.landscape.columns;
+		this.rows = window.landscape.rows;
+		this.cells = window.landscape.cells;
 
 		this.parameters = {
 			h: 0,
@@ -105,45 +181,33 @@ var Transition = function () {
 		this.cellColors = ['blue', 'green', 'purple', 'grey', 'borderOnly', 'red'];
 		this.cycle = 0;
 
-		this.diagonal = {
-			shapeFunction: function (x, y, parameters) { return Math.abs(this.parameters.alpha * (x - this.parameters.h) + this.parameters.beta * (y - this.parameters.k)); }.bind(this),
-			criticalValues: [[0, 0], [this.columns, 0], [0, this.rows], [this.columns, this.rows]],
-			range: 0
-		};
-
-		this.circular = {
-			shapeFunction: function (x, y, parameters) { return ((x - this.parameters.h) * (x - this.parameters.h)) + ((y - this.parameters.k) * (y - this.parameters.k)); }.bind(this),
-			criticalValues: [[0, 0], [this.columns, 0], [0, this.rows], [this.columns, this.rows]],
-			range: 0
-		};
-
-		this.sinWave = {
-			shapeFunction: function (x, y, parameters) { return (Math.abs(this.parameters.amplitude * Math.sin((this.parameters.b * x - this.parameters.h) * (2 * Math.PI / this.columns)) + (y - this.parameters.k))); }.bind(this),
-			criticalValues: [[0, 0], [this.columns, 0], [0, this.rows], [this.columns, this.rows], [(((this.columns / 4) + this.parameters.h) / this.parameters.b), 0], [(((this.columns / 4) + this.parameters.h) / this.parameters.b), this.rows], [(((3 * this.columns / 4) + this.parameters.h) / this.parameters.b), 0], [(((3 * this.columns / 4) + this.parameters.h) / this.parameters.b), this.rows]],
-			range: 0
+		this.transitionTypes = {
+			linear: {
+				shapeFunction: function (x, y, parameters) { return Math.abs(this.parameters.alpha * (x - this.parameters.h) + this.parameters.beta * (y - this.parameters.k)); }.bind(this),
+				criticalValues: [[0, 0], [this.columns, 0], [0, this.rows], [this.columns, this.rows]],
+				range: 0
+			},
+			quadratic: {
+				shapeFunction: function (x, y, parameters) { return Math.abs(0.01 * Math.pow((x - this.parameters.h), 2) + (y - this.parameters.k)); }.bind(this),
+				criticalValues: [[0, 0], [window.landscape.columns, 0], [0, window.landscape.rows], [window.landscape.columns, window.landscape.rows]],
+				range: 0
+			},
+			sine: {
+				shapeFunction: function (x, y, parameters) { return (Math.abs(this.parameters.amplitude * Math.sin((this.parameters.b * x - this.parameters.h) * (2 * Math.PI / this.columns)) + (y - this.parameters.k))); }.bind(this),
+				criticalValues: [[0, 0], [window.landscape.columns, 0], [0, window.landscape.rows], [window.landscape.columns, window.landscape.rows], [(((window.landscape.columns / 4) + this.parameters.h) / this.parameters.b), 0], [(((window.landscape.columns / 4) + this.parameters.h) / this.parameters.b), window.landscape.rows], [(((3 * window.landscape.columns / 4) + this.parameters.h) / this.parameters.b), 0], [(((3 * window.landscape.columns / 4) + this.parameters.h) / this.parameters.b), window.landscape.rows]],
+				range: 0
+			},
+			circular: {
+				shapeFunction: function (x, y, parameters) { return ((x - this.parameters.h) * (x - this.parameters.h)) + ((y - this.parameters.k) * (y - this.parameters.k)); }.bind(this),
+				criticalValues: [[0, 0], [this.columns, 0], [0, this.rows], [this.columns, this.rows]],
+				range: 0
+			}
 		};
 	};
 
-	this.setDimensions = function (landscape) {
-		var columns = landscape.columns,
-			rows = landscape.rows;
-
-		this.columns = columns;
-		this.rows = rows;
-	};
-
-	this.setCenter = function (x, y) {
-		var h = x,
-			k = y,
-			currentH = this.parameters.h,
+	this.setVerticalCenter = function (y, event) {
+		var k = y || event.target.value,
 			currentK = this.parameters.k;
-
-		if ((h % 1 === 0) && (h >= 0) && (h <= this.columns)) {
-			this.parameters.h = h;
-		} else {
-			h = this.parameters.h;
-			alert('Number entered for Horizontal Center is not valid');
-		}
 
 		if ((k % 1 === 0) && (k >= 0) && (k <= this.rows)) {
 			this.parameters.k = k;
@@ -152,12 +216,30 @@ var Transition = function () {
 			alert('Number entered for Vertical Center is not valid');
 		}
 
-		if ((h !== currentH) || (k !== currentK)) {
+		if ((k !== currentK)) {
 			console.log('Transition specific data requires updating');
 		}
 
-		console.log('New Center:\t\t\t\t(' + this.parameters.h + ', ' + this.parameters.k + ')');
-	};
+//		console.log('New Center:\t\t\t\t(' + this.parameters.h + ', ' + this.parameters.k + ')');
+	}.bind(this);
+
+	this.setHorizontalCenter = function (x, event) {
+		var h = x || event.target.value,
+			currentH = this.parameters.h;
+
+		if ((h % 1 === 0) && (h >= 0) && (h <= this.columns)) {
+			this.parameters.h = h;
+		} else {
+			h = this.parameters.h;
+			alert('Number entered for Horizontal Center is not valid');
+		}
+
+		if ((h !== currentH)) {
+			console.log('Transition specific data requires updating');
+		}
+
+//		console.log('New Center:\t\t\t\t(' + this.parameters.h + ', ' + this.parameters.k + ')');
+	}.bind(this);
 
 	this.setAngle = function (alpha) {
 		var beta = 1 - Math.abs(alpha),
@@ -239,19 +321,19 @@ var Transition = function () {
 		}
 	};
 
-	this.setTransition = function (transition1, transition2) {
+	this.setTransition = function (transition1, event) {
 		this.clearTransition();
+
+		if (event) {
+			transition1 = this.transitionTypes[event.target.value];
+			console.log(transition1.shapeFunction);
+		}
 
 		if (transition1) {
 			this.parameters.shapeFunction[0] = transition1.shapeFunction;
 			this.parameters.criticalValues[0] = transition1.criticalValues;
 		}
-
-		if (transition2) {
-			this.parameters.shapeFunction.push(transition2.shapeFunction);
-			this.parameters.criticalValues.push(transition2.criticalValues);
-		}
-	};
+	}.bind(this);
 
 	this.clearTransition = function () {
 		this.parameters.shapeFunction = [];
@@ -290,7 +372,7 @@ var Transition = function () {
 
 		this.parameters.range = compositeMax - compositeMin;
 
-		console.log(this.parameters.range);
+//		console.log(this.parameters.range);
 
 		return (compositeMax - compositeMin);
 	};
@@ -311,8 +393,8 @@ var Transition = function () {
 
 		range = this.range();
 
-		for (x = 0; x < this.columns; x += 1) {
-			for (y = 0; y < this.rows; y += 1) {
+		for (x = 0; x < window.landscape.columns; x += 1) {
+			for (y = 0; y < window.landscape.rows; y += 1) {
 				value = 0;
 				for (n = 0; n < shapeFunction.length; n += 1) {
 					value += shapeFunction[n](x, y);
@@ -330,35 +412,3 @@ var Transition = function () {
 		this.cells[x][y].setAttribute('color', color);
 	};
 };
-
-var Interface = function () {
-	'use strict';
-
-
-};
-
-var blank = new Landscape();
-var neon = new Transition();
-
-neon.initialize(blank);
-neon.setTransition(neon.diagonal);
-neon.setCenter(0, 18);
-neon.setColor('grey');
-neon.setAngle(0);
-neon.setVariance(0.15);
-neon.setDuration(3200);
-neon.setLag(0);
-neon.setAmplitude(5);
-neon.setB(3.5);
-neon.startTransition();
-
-window.setInterval(function () {
-	'use strict';
-	neon.setAngle(0.6);
-	neon.setTransition(neon.sinWave);
-	neon.setCenter(Math.floor(Math.random() * neon.columns), Math.floor(Math.random() * neon.rows));
-	neon.setColor(neon.cellColors[neon.cycle % 3]);
-	neon.setLag(0);
-	neon.startTransition();
-	neon.cycle += 1;
-}, 6400);

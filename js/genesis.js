@@ -174,11 +174,11 @@ var Genesis = function () {
 		}
 	};
 };
-
-window.onload = function () {
-	'use strict';
-	//console.log('The page has been successfully loaded!');
-
-	var newStrand = new Genesis();
-	newStrand.enableAutogenesis();
-};
+//
+//window.onload = function () {
+//	'use strict';
+//	//console.log('The page has been successfully loaded!');
+//
+//	var newStrand = new Genesis();
+//	newStrand.enableAutogenesis();
+//};
