@@ -77,7 +77,10 @@ var Handler = function () {
 					  [this.settings.landscape.cellBorderWidth.number.self, 'change', window.landscape.setCellBorderWidth],
 					  [this.settings.landscape.cellBorderRadius.number.self, 'change', window.landscape.setCellBorderRadius],
 					  [this.settings.transition.type.select.self, 'change', window.transition.setTransition.bind(null, event)],
-					  [this.settings.transition.horizontalCenter.self, 'change', window.transition.setHorizontalCenter.bind(null, event)]];
+					  [this.settings.transition.horizontalCenter.self, 'change', window.transition.setHorizontalCenter.bind(null, event)],
+					  [this.settings.transition.verticalCenter.self, 'change', window.transition.setVerticalCenter.bind(null, event)],
+					  [this.settings.transition.duration.self, 'change', window.transition.setDuration.bind(null, event)],
+					  [this.settings.transition.variance.self, 'change', window.transition.setVariance.bind(null, event)]];
 
 		return eventArray;
 	};
@@ -415,7 +418,7 @@ var Handler = function () {
 			}
 		},
 		transition: {
-			child: ['type', 'horizontalCenter'],
+			child: ['type', 'horizontalCenter', 'verticalCenter', 'duration', 'variance'],
 			elementType: 'section',
 			id: 'transition-settings',
 			type: {
@@ -489,6 +492,63 @@ var Handler = function () {
 				name: {
 					elementType: 'div',
 					elementTextNode: 'Transition Horizontal Center',
+					className: 'option'
+				},
+				tooltip: {
+					elementType: 'div',
+					elementTextNode: '',
+					className: 'tooltip'
+				}
+			},
+			verticalCenter: {
+				child: ['number', 'name', 'tooltip'],
+				elementType: 'div',
+				className: 'transition settings',
+				number: {
+					elementType: 'input',
+					attribute: [['type', 'number'], ['name', 'verticalCenter'], ['min', 0], ['max', window.landscape.rows], ['step', 1], ['value', 0]]
+				},
+				name: {
+					elementType: 'div',
+					elementTextNode: 'Transition Vertical Center',
+					className: 'option'
+				},
+				tooltip: {
+					elementType: 'div',
+					elementTextNode: '',
+					className: 'tooltip'
+				}
+			},
+			duration: {
+				child: ['number', 'name', 'tooltip'],
+				elementType: 'div',
+				className: 'transition settings',
+				number: {
+					elementType: 'input',
+					attribute: [['type', 'number'], ['name', 'duration'], ['min', 100], ['max', 600000], ['step', 100], ['value', 7200]]
+				},
+				name: {
+					elementType: 'div',
+					elementTextNode: 'Transition Duration',
+					className: 'option'
+				},
+				tooltip: {
+					elementType: 'div',
+					elementTextNode: '',
+					className: 'tooltip'
+				}
+			},
+			variance: {
+				child: ['number', 'name', 'tooltip'],
+				elementType: 'div',
+				className: 'transition settings',
+				number: {
+					elementType: 'input',
+					attribute: [['type', 'number'], ['name', 'variance'], ['min', 0], ['max', 1], ['step', 0.01], ['value', 0]]
+				},
+				name: {
+					elementType: 'div',
+					elementTextNode: 'Transition Variance',
 					className: 'option'
 				},
 				tooltip: {

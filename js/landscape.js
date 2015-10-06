@@ -205,9 +205,11 @@ var Transition = function () {
 		};
 	};
 
-	this.setVerticalCenter = function (y, event) {
+	this.setVerticalCenter = function (y) {
 		var k = y || event.target.value,
 			currentK = this.parameters.k;
+
+		console.log(k);
 
 		if ((k % 1 === 0) && (k >= 0) && (k <= this.rows)) {
 			this.parameters.k = k;
@@ -223,7 +225,7 @@ var Transition = function () {
 //		console.log('New Center:\t\t\t\t(' + this.parameters.h + ', ' + this.parameters.k + ')');
 	}.bind(this);
 
-	this.setHorizontalCenter = function (x, event) {
+	this.setHorizontalCenter = function (x) {
 		var h = x || event.target.value,
 			currentH = this.parameters.h;
 
@@ -288,17 +290,22 @@ var Transition = function () {
 		}
 	};
 
-	this.setDuration = function (duration) {
+	this.setDuration = function (time) {
+		var duration = time || Number(event.target.value);
+		console.log(duration);
+
 		if ((typeof duration === 'number') && (duration >= 0)) {
 			this.parameters.duration = duration;
 		}
-	};
+	}.bind(this);
 
 	this.setVariance = function (variance) {
 		if ((typeof variance === 'number') && (variance >= 0) && (variance <= 1)) {
 			this.parameters.variance = variance;
+		} else {
+			this.parameters.variance = Number(event.target.value);
 		}
-	};
+	}.bind(this);
 
 	this.setColor = function (color) {
 		var x = 0;

@@ -18,7 +18,6 @@ this.transition.startTransition();
 window.setInterval(function () {
 	'use strict';
 	this.transition.setAngle(0.6);
-//	this.transition.setCenter(Math.floor(Math.random() * this.transition.columns), Math.floor(Math.random() * this.transition.rows));
 	this.transition.setColor(this.transition.cellColors[this.transition.cycle % 3]);
 	this.transition.setLag(0);
 	this.transition.startTransition();
