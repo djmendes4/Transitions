@@ -30,6 +30,7 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 	box-shadow: 0px 0px 6px 2px rgba(0, 0, 0, 0.5), 0px 0px 8px 0px rgba(75, 81, 93, 0.2) inset;
 	opacity: 1.0;
 	transition: opacity,background-color ease-out 0.6s;
+	top: 150px;
 }
 
 .settings.toggle[tempt] {
@@ -80,31 +81,17 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 }
 
 #menu-items {
-	margin-top: 40px;
-}
-
-.screen.settings.menu-item {
-	position: absolute;
-	left: 55%;
-}
-
-.landscape.settings.menu-item {
-	position: absolute;
-	left: 21%;
-	width: 11%;
-}
-
-.transition.settings.menu-item {
-	position: absolute;
-	left: 33%;
-	width: 12%;
+	width: 80%;
+	margin: 0px auto;
+	position: relative;
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: center;
+	align-content: center;
 }
 
 .menu-item {
-	width: 8%;
-	height: 24px;
-	top: 6px;
-	border-radius: 8px;
+	border-radius: 0px 0px 5px 5px;
 	border: 1px solid black;
 	background-color: rgba(30, 34, 44, 1);
 	box-shadow: 0px 0px 6px 2px rgba(0, 0, 0, 0.5), 0px 0px 8px 0px rgba(75, 81, 93, 0.2) inset;
@@ -113,10 +100,13 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 	text-align: center;
 	color: rgba(101, 106, 116, 1);
 	position: relative;
-	line-height: 28px;
 	letter-spacing: 4px;
 	font-variant: small-caps;
+	font-weight: bold;
+	text-shadow: -1px 1px 0px black;
 	cursor: default;
+	margin: 0px 3px;
+	padding: 0px 5px;
 }
 
 .menu-item::first-letter {

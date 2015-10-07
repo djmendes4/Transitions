@@ -60,27 +60,28 @@ var Handler = function () {
 
 	this.updateEventListeners = function () {
 		var eventArray = [],
-			menu = this.settings.menu,
+			menu = this.settingsMenu,
+			screen = this.screenSettings,
 			i = 0;
 
 		eventArray = [[menu.toggle.self, ['mouseover', 'mousemove', 'mouseout'], this.temptSettingsMenu.bind(this)],
 					  [menu.toggle.self, 'click', this.toggleSettingsMenu.bind(this)],
 					  [[menu.screen.self, menu.landscape.self, menu.transition.self], ['mouseover', 'mouseout'], this.temptSettings.bind(this)],
-					  [[menu.screen.self, menu.landscape.self, menu.transition.self], 'click', [this.toggleSettings.bind(this, this.settings.screen), this.toggleSettings.bind(this, this.settings.landscape), this.toggleSettings.bind(this, this.settings.transition)]],
-					  [this.settings.screen.fullscreen.checkbox.self, 'change', this.toggleFullscreen.bind(this)],
-					  [this.settings.screen.theater.checkbox.self, 'change', this.toggleTheaterMode.bind(this)],
-					  [this.settings.landscape.width.number.self, 'change', window.landscape.setLandscapeWidth],
-					  [this.settings.landscape.height.number.self, 'change', window.landscape.setLandscapeHeight],
-					  [this.settings.landscape.borderWidth.number.self, 'change', window.landscape.setBorderWidth],
-					  [this.settings.landscape.cellWidth.number.self, 'change', window.landscape.setCellWidth],
-					  [this.settings.landscape.cellHeight.number.self, 'change', window.landscape.setCellHeight],
-					  [this.settings.landscape.cellBorderWidth.number.self, 'change', window.landscape.setCellBorderWidth],
-					  [this.settings.landscape.cellBorderRadius.number.self, 'change', window.landscape.setCellBorderRadius],
-					  [this.settings.transition.type.select.self, 'change', window.transition.setTransition.bind(null, event)],
-					  [this.settings.transition.horizontalCenter.self, 'change', window.transition.setHorizontalCenter.bind(null, event)],
-					  [this.settings.transition.verticalCenter.self, 'change', window.transition.setVerticalCenter.bind(null, event)],
-					  [this.settings.transition.duration.self, 'change', window.transition.setDuration.bind(null, event)],
-					  [this.settings.transition.variance.self, 'change', window.transition.setVariance.bind(null, event)]];
+					  [[menu.screen.self, menu.landscape.self, menu.transition.self], 'click', [this.toggleSettings.bind(this, screen), this.toggleSettings.bind(this, this.settings.landscape), this.toggleSettings.bind(this, this.settings.transition)]],
+					  [screen.fullscreen.checkbox.self, 'change', this.toggleFullscreen.bind(this)],
+					  [screen.theater.checkbox.self, 'change', this.toggleTheaterMode.bind(this)]];
+//					  [this.settings.landscape.width.number.self, 'change', window.landscape.setLandscapeWidth],
+//					  [this.settings.landscape.height.number.self, 'change', window.landscape.setLandscapeHeight],
+//					  [this.settings.landscape.borderWidth.number.self, 'change', window.landscape.setBorderWidth],
+//					  [this.settings.landscape.cellWidth.number.self, 'change', window.landscape.setCellWidth],
+//					  [this.settings.landscape.cellHeight.number.self, 'change', window.landscape.setCellHeight],
+//					  [this.settings.landscape.cellBorderWidth.number.self, 'change', window.landscape.setCellBorderWidth],
+//					  [this.settings.landscape.cellBorderRadius.number.self, 'change', window.landscape.setCellBorderRadius],
+//					  [this.settings.transition.type.select.self, 'change', window.transition.setTransition.bind(null, event)],
+//					  [this.settings.transition.horizontalCenter.self, 'change', window.transition.setHorizontalCenter.bind(null, event)],
+//					  [this.settings.transition.verticalCenter.self, 'change', window.transition.setVerticalCenter.bind(null, event)],
+//					  [this.settings.transition.duration.self, 'change', window.transition.setDuration.bind(null, event)],
+//					  [this.settings.transition.variance.self, 'change', window.transition.setVariance.bind(null, event)]];
 
 		return eventArray;
 	};
@@ -206,79 +207,83 @@ var Handler = function () {
 		}
 	};
 
-	this.settings = {
+	this.settingsMenu = {
 		parent: document.getElementById('container'),
-		child: ['menu', 'screen', 'landscape', 'transition'],
+		child: ['toggle', 'screen', 'landscape', 'transition'],
 		elementType: 'section',
-		id: 'settings',
-		menu: {
-			child: ['toggle', 'screen', 'landscape', 'transition'],
-			elementType: 'section',
-			id: 'menu-items',
-			toggle: {
-				elementType: 'div',
-				className: 'settings toggle'
-			},
-			screen: {
-				elementType: 'div',
-				elementTextNode: 'Screen',
-				className: 'screen settings menu-item',
-				mark: 'screen'
-			},
-			landscape: {
-				elementType: 'div',
-				elementTextNode: 'Landscape',
-				className: 'landscape settings menu-item'
-			},
-			transition: {
-				elementType: 'div',
-				elementTextNode: 'Transition',
-				className: 'transition settings menu-item'
-			}
+		id: 'menu-items',
+		toggle: {
+			elementType: 'div',
+			className: 'settings toggle'
 		},
 		screen: {
-			child: ['fullscreen', 'theater'],
-			elementType: 'section',
-			id: 'screen-settings',
-			fullscreen: {
-				child: ['checkbox', 'name', 'tooltip'],
-				elementType: 'div',
-				className: 'screen settings',
-				checkbox: {
-					elementType: 'input',
-					attribute: [['type', 'checkbox'], ['name', 'fullscreen'], ['value', 'fullscreen']]
-				},
-				name: {
-					elementType: 'div',
-					elementTextNode: 'Fullscreen mode',
-					className: 'option'
-				},
-				tooltip: {
-					elementType: 'div',
-					elementTextNode: 'Determines whether or not to request fullscreen access from the browser',
-					className: 'tooltip'
-				}
+			elementType: 'div',
+			elementTextNode: 'Screen',
+			className: 'screen settings menu-item',
+			mark: 'screen'
+		},
+		landscape: {
+			elementType: 'div',
+			elementTextNode: 'Landscape',
+			className: 'landscape settings menu-item'
+		},
+		transition: {
+			elementType: 'div',
+			elementTextNode: 'Transition',
+			className: 'transition settings menu-item'
+		}
+	};
+
+	this.screenSettings = {
+		parent: document.getElementById('container'),
+		child: ['fullscreen', 'theater'],
+		elementType: 'section',
+		id: 'screen-settings',
+		fullscreen: {
+			child: ['checkbox', 'name', 'tooltip'],
+			elementType: 'div',
+			className: 'screen settings',
+			checkbox: {
+				elementType: 'input',
+				attribute: [['type', 'checkbox'], ['name', 'fullscreen'], ['value', 'fullscreen']]
 			},
-			theater: {
-				child: ['checkbox', 'name', 'tooltip'],
+			name: {
 				elementType: 'div',
-				className: 'screen settings',
-				checkbox: {
-					elementType: 'input',
-					attribute: [['type', 'checkbox'], ['name', 'theater'], ['value', 'theater']]
-				},
-				name: {
-					elementType: 'div',
-					elementTextNode: 'Theater Mode',
-					className: 'option'
-				},
-				tooltip: {
-					elementType: 'div',
-					elementTextNode: 'Darkens the background',
-					className: 'tooltip'
-				}
+				elementTextNode: 'Fullscreen mode',
+				className: 'option'
+			},
+			tooltip: {
+				elementType: 'div',
+				elementTextNode: 'Determines whether or not to request fullscreen access from the browser',
+				className: 'tooltip'
 			}
 		},
+		theater: {
+			child: ['checkbox', 'name', 'tooltip'],
+			elementType: 'div',
+			className: 'screen settings',
+			checkbox: {
+				elementType: 'input',
+				attribute: [['type', 'checkbox'], ['name', 'theater'], ['value', 'theater']]
+			},
+			name: {
+				elementType: 'div',
+				elementTextNode: 'Theater Mode',
+				className: 'option'
+			},
+			tooltip: {
+				elementType: 'div',
+				elementTextNode: 'Darkens the background',
+				className: 'tooltip'
+			}
+		}
+	};
+
+	this.settings = {
+		parent: document.getElementById('container'),
+		child: ['landscape', 'transition'],
+		elementType: 'section',
+		id: 'settings',
 		landscape: {
 			child: ['width', 'height', 'borderWidth', 'cellWidth', 'cellHeight', 'cellBorderWidth', 'cellBorderRadius'],
 			elementType: 'section',
@@ -561,7 +566,8 @@ var Handler = function () {
 	};
 
 	this.initialize = function () {
-		this.buildMenu(this.settings);
+		this.buildMenu(this.settingsMenu);
+		this.buildMenu(this.screenSettings);
 		this.eventListeners = this.updateEventListeners();
 		this.addEventListeners(this.eventListeners);
 	};

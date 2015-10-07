@@ -15,7 +15,8 @@ body {
 #landscape {
 	height: 480px;
 	position: relative;
-	margin: 0px auto 20px auto;
+	margin: 0px auto;
+	margin-bottom: -2px;
 	border-style: solid;
 	border-color: rgba(0, 0, 0, 1.0);
 	overflow: hidden;
