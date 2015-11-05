@@ -49,17 +49,6 @@ body {
 	z-index: 10000;
 }
 
-.cell {
-	position: absolute;
-	display: inline-block;
-	border-style: solid;
-/*	border-color: rgba(0, 0, 0, 0.4);*/
-/*	border-radius: 5px;*/
-	font-size: 0px;
-	background-color: inherit;
-	z-index: 10000;
-}
-
 #accent {
 	width: 80%;
 	margin: 0px auto;
@@ -87,18 +76,18 @@ body {
 [color='none'].t4 { background-color: rgba(255, 255, 255, 1.0); z-index: 20000; }
 
 /*--- Purple ---*/
-[color='purple'].t0 { background-color: #552470; z-index: 20000; }
-[color='purple'].t1 { background-color: #73428F; z-index: 20000; }
-[color='purple'].t2 { background-color: #63317E; z-index: 20000; }
-[color='purple'].t3 { background-color: #45175F; z-index: 20000; }
-[color='purple'].t4 { background-color: #340B4B; z-index: 20000; }
+[color='purple'].t0 { background-color: #552470; z-index: 20000; fill: #552470; }
+[color='purple'].t1 { background-color: #73428F; z-index: 20000; fill: #73428F; }
+[color='purple'].t2 { background-color: #63317E; z-index: 20000; fill: #63317E; }
+[color='purple'].t3 { background-color: #45175F; z-index: 20000; fill: #45175F; }
+[color='purple'].t4 { background-color: #340B4B; z-index: 20000; fill: #340B4B; }
 
 /*--- Grey ---*/
-[color='grey'].t0 { background-color: #4F5452; z-index: 20000; }
-[color='grey'].t1 { background-color: #737977; z-index: 20000; }
-[color='grey'].t2 { background-color: #616664; z-index: 20000; }
-[color='grey'].t3 { background-color: #3C403E; z-index: 20000; }
-[color='grey'].t4 { background-color: #262928; z-index: 20000; }
+[color='grey'].t0 { background-color: #4F5452; z-index: 20000; fill: #4F5452; }
+[color='grey'].t1 { background-color: #737977; z-index: 20000; fill: #737977; }
+[color='grey'].t2 { background-color: #616664; z-index: 20000; fill: #616664; }
+[color='grey'].t3 { background-color: #3C403E; z-index: 20000; fill: #3C403E; }
+[color='grey'].t4 { background-color: #262928; z-index: 20000; fill: #262928; }
 
 /*--- Red ---*/
 [color='red'].t0 { background-color: #BF0909 }
@@ -108,15 +97,15 @@ body {
 [color='red'].t4 { background-color: #920000 }
 
 /*--- Blue ---*/
-[color='blue'].t0 { background-color: #051745; z-index: 20000; }
-[color='blue'].t1 { background-color: #06102B; z-index: 20000; }
-[color='blue'].t2 { background-color: #041235; z-index: 20000; }
-[color='blue'].t3 { background-color: #092468; z-index: 20000; }
-[color='blue'].t4 { background-color: #0B308E; z-index: 20000; }
+[color='blue'].t0 { background-color: #051745; z-index: 20000; fill: #051745; }
+[color='blue'].t1 { background-color: #06102B; z-index: 20000; fill: #06102B; }
+[color='blue'].t2 { background-color: #041235; z-index: 20000; fill: #041235; }
+[color='blue'].t3 { background-color: #092468; z-index: 20000; fill: #092468; }
+[color='blue'].t4 { background-color: #0B308E; z-index: 20000; fill: #0B308E; }
 
 /*--- Green ---*/
-[color='green'].t0 { background-color: rgba(37, 132, 27, 1.0); }
-[color='green'].t1 { background-color: #28B719 }
-[color='green'].t2 { background-color: #28991C }
-[color='green'].t3 { background-color: #1A6712 }
-[color='green'].t4 { background-color: #1A5913 }
+[color='green'].t0 { background-color: rgba(37, 132, 27, 1.0); fill: rgba(37, 132, 27, 1.0);}
+[color='green'].t1 { background-color: #28B719; fill: #28B719; }
+[color='green'].t2 { background-color: #28991C; fill: #28991C; }
+[color='green'].t3 { background-color: #1A6712; fill: #1A6712; }
+[color='green'].t4 { background-color: #1A5913; fill: #1A5913; }

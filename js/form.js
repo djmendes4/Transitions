@@ -60,16 +60,17 @@ var Handler = function () {
 
 	this.updateEventListeners = function () {
 		var eventArray = [],
+			toggle = this.settingsToggle,
 			menu = this.settingsMenu,
 			screen = this.screenSettings,
 			i = 0;
 
-		eventArray = [[menu.toggle.self, ['mouseover', 'mousemove', 'mouseout'], this.temptSettingsMenu.bind(this)],
-					  [menu.toggle.self, 'click', this.toggleSettingsMenu.bind(this)],
-					  [[menu.screen.self, menu.landscape.self, menu.transition.self], ['mouseover', 'mouseout'], this.temptSettings.bind(this)],
-					  [[menu.screen.self, menu.landscape.self, menu.transition.self], 'click', [this.toggleSettings.bind(this, screen), this.toggleSettings.bind(this, this.settings.landscape), this.toggleSettings.bind(this, this.settings.transition)]],
-					  [screen.fullscreen.checkbox.self, 'change', this.toggleFullscreen.bind(this)],
-					  [screen.theater.checkbox.self, 'change', this.toggleTheaterMode.bind(this)]];
+		eventArray = [[toggle.settings.self, ['mouseover', 'mousemove', 'mouseout'], this.temptSettingsMenu.bind(this)],
+					  [toggle.settings.self, 'click', this.toggleSettingsMenu.bind(this)]];
+//					  [[menu.screen.self, menu.landscape.self, menu.transition.self], ['mouseover', 'mouseout'], this.temptSettings.bind(this)],
+//					  [[menu.screen.self, menu.landscape.self, menu.transition.self], 'click', [this.toggleSettings.bind(this, screen), this.toggleSettings.bind(this, this.settings.landscape), this.toggleSettings.bind(this, this.settings.transition)]],
+//					  [screen.fullscreen.checkbox.self, 'change', this.toggleFullscreen.bind(this)],
+//					  [screen.theater.checkbox.self, 'change', this.toggleTheaterMode.bind(this)],
 //					  [this.settings.landscape.width.number.self, 'change', window.landscape.setLandscapeWidth],
 //					  [this.settings.landscape.height.number.self, 'change', window.landscape.setLandscapeHeight],
 //					  [this.settings.landscape.borderWidth.number.self, 'change', window.landscape.setBorderWidth],
@@ -114,10 +115,10 @@ var Handler = function () {
 
 		if (type === 'mouseover' || (type === 'mousemove' && (state === null || state === '2'))) {
 			target.setAttribute('tempt', '');
-			this.settings.self.setAttribute('tempt', '');
+			this.settingsMenu.self.setAttribute('tempt', '');
 		} else if (type === 'mouseout') {
 			target.removeAttribute('tempt');
-			this.settings.self.removeAttribute('tempt');
+			this.settingsMenu.self.removeAttribute('tempt');
 		}
 	};
 
@@ -127,7 +128,7 @@ var Handler = function () {
 			state = target.getAttribute('state');
 
 		if (state === null) {
-			target.setAttribute('state', '1');
+			target.setAttribute('hidden', '');
 			this.settings.self.setAttribute('lowered', '');
 
 			setTimeout(function () {
@@ -157,7 +158,7 @@ var Handler = function () {
 		}
 	};
 
-	this.toggleSettings = function (settings, event) {
+	this.toggleSettings = function (settings) {
 		var target = event.target,
 			mark = settings.self,
 			selected = event.target.getAttribute('selected');
@@ -166,22 +167,22 @@ var Handler = function () {
 			this.currentMenuItem = target;
 			target.setAttribute('selected', '');
 
-			this.currentSettingsMenu = mark;
-			mark.setAttribute('selected', '');
+//			this.currentSettingsMenu = mark;
+//			mark.setAttribute('selected', '');
 		} else if (selected === null && this.currentMenuItem !== null) {
 			this.currentMenuItem.removeAttribute('selected');
 			this.currentMenuItem = target;
 			target.setAttribute('selected', '');
 
-			this.currentSettingsMenu.removeAttribute('selected');
-			this.currentSettingsMenu = mark;
-			mark.setAttribute('selected', '');
+//			this.currentSettingsMenu.removeAttribute('selected');
+//			this.currentSettingsMenu = mark;
+//			mark.setAttribute('selected', '');
 		} else if (selected === '') {
 			this.currentMenuItem = null;
 			target.removeAttribute('selected');
 
-			this.currentSettingsMenu = null;
-			mark.removeAttribute('selected');
+//			this.currentSettingsMenu = null;
+//			mark.removeAttribute('selected');
 		}
 	};
 
@@ -207,20 +208,26 @@ var Handler = function () {
 		}
 	};
 
+	this.settingsToggle = {
+		parent: document.getElementById('container'),
+		child: ['settings'],
+		elementType: 'section',
+		settings: {
+			elementType: 'div',
+			elementTextNode: 'Settings',
+			className: 'toggle settings'
+		}
+	};
+
 	this.settingsMenu = {
 		parent: document.getElementById('container'),
-		child: ['toggle', 'screen', 'landscape', 'transition'],
+		child: ['screen', 'landscape', 'transition'],
 		elementType: 'section',
 		id: 'menu-items',
-		toggle: {
-			elementType: 'div',
-			className: 'settings toggle'
-		},
 		screen: {
 			elementType: 'div',
 			elementTextNode: 'Screen',
 			className: 'screen settings menu-item',
-			mark: 'screen'
 		},
 		landscape: {
 			elementType: 'div',
@@ -566,8 +573,10 @@ var Handler = function () {
 	};
 
 	this.initialize = function () {
+		this.buildMenu(this.settingsToggle);
 		this.buildMenu(this.settingsMenu);
 		this.buildMenu(this.screenSettings);
+
 		this.eventListeners = this.updateEventListeners();
 		this.addEventListeners(this.eventListeners);
 	};

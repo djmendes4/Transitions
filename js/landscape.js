@@ -38,36 +38,61 @@ var Landscape = function () {
 			centerWidth = 0,
 			centerHeight = 0,
 			style = '',
+			svgns = "http://www.w3.org/2000/svg",
 			newDiv = {},
+			newSVGRect = {},
 			newStyle = document.createElement('style'),
+			newSVG = document.createElementNS(svgns, 'svg'),
 			fragment = document.createDocumentFragment();
 
 		centerWidth = Math.ceil(((this.columns * (this.cellWidth + this.cellBorderWidth) + this.cellBorderWidth) - (this.width)) / 2);
 		centerHeight = (this.cellHeight + this.cellBorderWidth) * this.rows - this.cellBorderWidth;
 
-		console.log(centerWidth);
+		newSVG.setAttribute('id', 'Guile');
+		newSVG.setAttribute('width', this.columns * (this.cellWidth + this.cellBorderWidth) + this.cellBorderWidth);
+		newSVG.setAttribute('height', centerHeight);
 
 		for (x = 0; x < this.columns; x += 1) {
 			this.cells[x] = [];
 			for (y = 0; y < this.rows; y += 1) {
 				colorTone = Math.floor(Math.random() * this.cellTones.length);
 
-				newDiv = document.createElement('div');
-				newDiv.setAttribute('id', x + ',' + y);
-				newDiv.setAttribute('class', 'cell ' + this.cellTones[colorTone]);
-				newDiv.style.left = (x * (this.cellWidth + this.cellBorderWidth) - centerWidth) + 'px';
-				newDiv.style.top = (y * (this.cellHeight + this.cellBorderWidth) - this.cellBorderWidth) + 'px';
+				newSVGRect = document.createElementNS(svgns, 'rect');
+				newSVGRect.setAttribute('id', x + ',' + y);
+				newSVGRect.setAttribute('class', 'cell ' + this.cellTones[colorTone]);
+				newSVGRect.setAttribute('color', 'grey');
+				newSVGRect.setAttribute('x', (x * (this.cellWidth + this.cellBorderWidth) - centerWidth));
+				newSVGRect.setAttribute('y', (y * (this.cellHeight + this.cellBorderWidth) - this.cellBorderWidth));
+				newSVGRect.setAttribute('width', this.cellWidth);
+				newSVGRect.setAttribute('height', this.cellHeight);
 
-				fragment.appendChild(newDiv);
+				newSVG.appendChild(newSVGRect);
 
-				this.cells[x][y] = newDiv;
+				this.cells[x][y] = newSVGRect;
 			}
 		}
 
+		fragment.appendChild(newSVG);
+
+//		for (x = 0; x < this.columns; x += 1) {
+//			this.cells[x] = [];
+//			for (y = 0; y < this.rows; y += 1) {
+//				colorTone = Math.floor(Math.random() * this.cellTones.length);
+//
+//				newDiv = document.createElement('div');
+//				newDiv.setAttribute('id', x + ',' + y);
+//				newDiv.setAttribute('class', 'cell ' + this.cellTones[colorTone]);
+//				newDiv.style.left = (x * (this.cellWidth + this.cellBorderWidth) - centerWidth) + 'px';
+//				newDiv.style.top = (y * (this.cellHeight + this.cellBorderWidth) - this.cellBorderWidth) + 'px';
+//
+//				fragment.appendChild(newDiv);
+//			}
+//		}
+
 		newStyle.type = 'text/css';
 		newStyle.setAttribute('id', 'landscape-css');
-		style = '\n.cell {\n\twidth: ' + this.cellWidth + 'px;\n\theight: ' + this.cellHeight + 'px;\n\tborder-width: ' + this.cellBorderWidth + 'px;\n\tborder-radius: ' + this.cellBorderRadius + 'px;\n}\n';
-		style += '#landscape {\n\theight: ' + centerHeight + 'px;\n\tborder-width: ' + this.borderWidth + 'px;\n\twidth: ' + this.width + 'px;\n}\n';
+//		style = '\n.cell {\n\twidth: ' + this.cellWidth + 'px;\n\theight: ' + this.cellHeight + 'px;\n\tborder-width: ' + this.cellBorderWidth + 'px;\n\tborder-radius: ' + this.cellBorderRadius + 'px;\n}\n';
+		style = '#landscape {\n\theight: ' + centerHeight + 'px;\n\tborder-width: ' + this.borderWidth + 'px;\n\twidth: ' + this.width + 'px;\n}\n';
 
 		if (newStyle.styleSheet) {
 			newStyle.styleSheet.cssText = style;
@@ -83,12 +108,16 @@ var Landscape = function () {
 		this.landscape.appendChild(fragment);
 	};
 
+	this.getCells = function () {
+		return this.cells;
+	};
+
 	this.setLandscapeWidth = function (event) {
 		var width = Number(event.target.value);
 
 		this.width = width;
 		this.columns = Math.ceil(this.width / (this.cellWidth + this.cellBorderWidth));
-		console.log('Landscape Width: ' + this.width + '\n' + 'Columns: ' + this.columns);
+//		console.log('Landscape Width: ' + this.width + '\n' + 'Columns: ' + this.columns);
 
 		this.createGrid();
 	}.bind(this);
@@ -98,7 +127,7 @@ var Landscape = function () {
 
 		this.height = height;
 		this.rows = Math.floor(this.height / (this.cellHeight + this.cellBorderWidth));
-		console.log('Landscape Height: ' + this.height + '\n' + 'Rows: ' + this.rows);
+//		console.log('Landscape Height: ' + this.height + '\n' + 'Rows: ' + this.rows);
 
 		this.createGrid();
 	}.bind(this);
@@ -107,7 +136,7 @@ var Landscape = function () {
 		var width = event.target.value;
 
 		this.borderWidth = width;
-		console.log('Landscape Border Thickness: ' + this.borderWidth);
+//		console.log('Landscape Border Thickness: ' + this.borderWidth);
 
 		this.createGrid();
 	}.bind(this);
@@ -116,7 +145,7 @@ var Landscape = function () {
 		var width = Number(event.target.value);
 
 		this.cellWidth = width;
-		console.log('Cell Width: ' + this.cellWidth);
+//		console.log('Cell Width: ' + this.cellWidth);
 
 		this.columns = Math.ceil(this.width / (this.cellWidth + this.cellBorderWidth));
 		this.createGrid();
@@ -126,7 +155,7 @@ var Landscape = function () {
 		var height = Number(event.target.value);
 
 		this.cellHeight = height;
-		console.log('Cell Height: ' + this.cellHeight);
+//		console.log('Cell Height: ' + this.cellHeight);
 
 		this.rows = Math.floor(this.height / (this.cellHeight + this.cellBorderWidth));
 		this.createGrid();
@@ -136,7 +165,7 @@ var Landscape = function () {
 		var width = Number(event.target.value);
 
 		this.cellBorderWidth = width;
-		console.log('Cell Border Width: ' + this.cellBorderWidth);
+//		console.log('Cell Border Width: ' + this.cellBorderWidth);
 
 		this.createGrid();
 	}.bind(this);
@@ -145,7 +174,7 @@ var Landscape = function () {
 		var radius = Number(event.target.value);
 
 		this.cellBorderRadius = radius;
-		console.log('Cell Border Radius: ' + this.cellBorderRadius);
+//		console.log('Cell Border Radius: ' + this.cellBorderRadius);
 
 		this.createGrid();
 	}.bind(this);
@@ -209,7 +238,7 @@ var Transition = function () {
 		var k = y || event.target.value,
 			currentK = this.parameters.k;
 
-		console.log(k);
+//		console.log(k);
 
 		if ((k % 1 === 0) && (k >= 0) && (k <= this.rows)) {
 			this.parameters.k = k;
@@ -219,7 +248,7 @@ var Transition = function () {
 		}
 
 		if ((k !== currentK)) {
-			console.log('Transition specific data requires updating');
+//			console.log('Transition specific data requires updating');
 		}
 
 //		console.log('New Center:\t\t\t\t(' + this.parameters.h + ', ' + this.parameters.k + ')');
@@ -237,7 +266,7 @@ var Transition = function () {
 		}
 
 		if ((h !== currentH)) {
-			console.log('Transition specific data requires updating');
+//			console.log('Transition specific data requires updating');
 		}
 
 //		console.log('New Center:\t\t\t\t(' + this.parameters.h + ', ' + this.parameters.k + ')');
@@ -256,7 +285,7 @@ var Transition = function () {
 		}
 
 		if (alpha !== currentAlpha) {
-			console.log('Transition specific data requires updating');
+//			console.log('Transition specific data requires updating');
 		}
 	};
 
@@ -271,7 +300,7 @@ var Transition = function () {
 		}
 
 		if (amplitude !== currentAmplitude) {
-			console.log('Transition specific data requires updating');
+//			console.log('Transition specific data requires updating');
 		}
 	};
 
@@ -286,13 +315,13 @@ var Transition = function () {
 		}
 
 		if (b !== currentB) {
-			console.log('Transition specific data requires updating');
+//			console.log('Transition specific data requires updating');
 		}
 	};
 
 	this.setDuration = function (time) {
 		var duration = time || Number(event.target.value);
-		console.log(duration);
+//		console.log(duration);
 
 		if ((typeof duration === 'number') && (duration >= 0)) {
 			this.parameters.duration = duration;
@@ -333,7 +362,7 @@ var Transition = function () {
 
 		if (event) {
 			transition1 = this.transitionTypes[event.target.value];
-			console.log(transition1.shapeFunction);
+//			console.log(transition1.shapeFunction);
 		}
 
 		if (transition1) {
