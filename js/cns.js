@@ -6,8 +6,8 @@ this.handler = new Handler();
 
 this.transition.initialize(this.landscape);
 this.transition.setTransition(this.transition.transitionTypes.linear);
-console.log(this.transition.columns);
-console.log(this.transition.rows);
+//console.log(this.transition.columns);
+//console.log(this.transition.rows);
 this.transition.setHorizontalCenter(Math.floor(Math.random() * this.transition.columns));
 this.transition.setVerticalCenter(Math.floor(Math.random() * this.transition.rows));
 this.transition.setColor('grey');
@@ -25,8 +25,9 @@ window.setInterval(function () {
 	this.transition.setColor(this.transition.cellColors[this.transition.cycle % 3]);
 	this.transition.setLag(0);
 	this.transition.startTransition();
+	this.transition.setVariance(
 	this.transition.cycle += 1;
-}, 1600);
+}, 3200);
 
 /*
 Body Systems Analogy
