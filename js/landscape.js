@@ -25,7 +25,7 @@ var Landscape = function () {
 		this.cellBorderRadius = 0;
 		this.columns = Math.ceil(this.width / (this.cellWidth + this.cellBorderWidth));
 		this.rows = Math.floor(this.height / (this.cellHeight + this.cellBorderWidth));
-		//console.log('Cell Attributes:' + '\n\tSize:\t\t\t\t' + this.cellSize + 'px\n\tBorder Width:\t\t' + this.cellBorderWidth + 'px\n\tColumns:\t\t\t' + this.columns + '\n\tRows:\t\t\t\t' + this.rows);
+		console.log('Cell Attributes:' + '\n\tSize:\t\t\t\t' + this.cellSize + 'px\n\tBorder Width:\t\t' + this.cellBorderWidth + 'px\n\tColumns:\t\t\t' + this.columns + '\n\tRows:\t\t\t\t' + this.rows);
 
 		this.cellTones = ['t0', 't1', 't2', 't3', 't4'];
 		//console.log('Cell Properties:' + '\n\tTones:\t\t\t\t5');
