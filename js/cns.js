@@ -6,8 +6,8 @@ this.handler = new Handler();
 
 this.transition.initialize(this.landscape);
 this.transition.setTransition(this.transition.transitionTypes.linear);
-this.transition.setHorizontalCenter(Math.floor(Math.random() * neon.columns));
-this.transition.setVerticalCenter(Math.floor(Math.random() * neon.rows));
+this.transition.setHorizontalCenter(Math.floor(Math.random() * this.columns));
+this.transition.setVerticalCenter(Math.floor(Math.random() * this.rows));
 this.transition.setColor('grey');
 this.transition.setAngle(0);
 this.transition.setVariance(0.1);
