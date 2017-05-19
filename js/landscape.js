@@ -448,3 +448,29 @@ var Transition = function () {
 		this.cells[x][y].setAttribute('color', color);
 	};
 };
+
+this.landscape = new Landscape();
+this.transition = new Transition();
+this.handler = new Handler();
+
+this.transition.initialize(this.landscape);
+this.transition.setTransition(this.transition.transitionTypes.linear);
+this.transition.setHorizontalCenter(Math.floor(Math.random() * neon.columns));
+this.transition.setVerticalCenter(Math.floor(Math.random() * neon.rows));
+this.transition.setColor('grey');
+this.transition.setAngle(0);
+this.transition.setVariance(0.1);
+this.transition.setDuration(3200);
+this.transition.setLag(0);
+this.transition.setAmplitude(4);
+this.transition.setB(5);
+this.transition.startTransition();
+
+window.setInterval(function () {
+	'use strict';
+	this.transition.setAngle(0.6);
+	this.transition.setColor(this.transition.cellColors[this.transition.cycle % 3]);
+	this.transition.setLag(0);
+	this.transition.startTransition();
+	this.transition.cycle += 1;
+}, 1600);
