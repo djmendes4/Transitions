@@ -342,7 +342,7 @@ var neon = new Transition();
 
 neon.initialize(blank);
 neon.setTransition(neon.diagonal);
-neon.setCenter(0, 18);
+neon.setCenter(Math.floor(Math.random() * neon.columns), Math.floor(Math.random() * neon.rows));
 neon.setColor('grey');
 neon.setAngle(0);
 neon.setVariance(0.15);
