@@ -1,6 +1,6 @@
 this.landscape = new Landscape();
 //this.dimensionalize = new Dimensionalize();
-this.raindrops = new Raindrops();
+//this.raindrops = new Raindrops();
 this.transition = new Transition();
 this.handler = new Handler();
 
@@ -15,16 +15,16 @@ this.transition.setDuration(3200);
 this.transition.setLag(0);
 this.transition.setAmplitude(4);
 this.transition.setB(5);
-//this.transition.startTransition();
-//
-//window.setInterval(function () {
-//	'use strict';
-//	this.transition.setAngle(0.6);
-//	this.transition.setColor(this.transition.cellColors[this.transition.cycle % 3]);
-//	this.transition.setLag(0);
-//	this.transition.startTransition();
-//	this.transition.cycle += 1;
-//}, 3200);
+this.transition.startTransition();
+
+window.setInterval(function () {
+	'use strict';
+	this.transition.setAngle(0.6);
+	this.transition.setColor(this.transition.cellColors[this.transition.cycle % 3]);
+	this.transition.setLag(0);
+	this.transition.startTransition();
+	this.transition.cycle += 1;
+}, 3200);
 
 /*
 Body Systems Analogy
