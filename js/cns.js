@@ -24,7 +24,7 @@ window.setInterval(function () {
 	this.transition.setLag(0);
 	this.transition.startTransition();
 	this.transition.cycle += 1;
-}, 3200);
+}, 1600);
 
 /*
 Body Systems Analogy
