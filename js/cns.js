@@ -7,6 +7,7 @@ this.handler = new Handler();
 this.transition.initialize(this.landscape);
 this.transition.setTransition(this.transition.transitionTypes.linear);
 console.log(this.transition.columns);
+console.log(this.transition.rows);
 this.transition.setHorizontalCenter(Math.floor(Math.random() * this.transition.columns));
 this.transition.setVerticalCenter(Math.floor(Math.random() * this.transition.rows));
 this.transition.setColor('grey');
