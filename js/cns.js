@@ -6,9 +6,9 @@ this.handler = new Handler();
 
 this.transition.initialize(this.landscape);
 this.transition.setTransition(this.transition.transitionTypes.linear);
-console.log(this.columns);
-this.transition.setHorizontalCenter(Math.floor(Math.random() * this.columns));
-this.transition.setVerticalCenter(Math.floor(Math.random() * this.rows));
+console.log(this.transition.columns);
+this.transition.setHorizontalCenter(Math.floor(Math.random() * this.transition.columns));
+this.transition.setVerticalCenter(Math.floor(Math.random() * this.transition.rows));
 this.transition.setColor('grey');
 this.transition.setAngle(0);
 this.transition.setVariance(0.1);
