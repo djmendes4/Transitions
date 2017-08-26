@@ -25,7 +25,7 @@ window.setInterval(function () {
 	this.transition.setColor(this.transition.cellColors[this.transition.cycle % 3]);
 	this.transition.setLag(0);
 	this.transition.startTransition();
-	this.transition.setVariance(
+	this.transition.setVariance(0.2);
 	this.transition.cycle += 1;
 }, 3200);
 
