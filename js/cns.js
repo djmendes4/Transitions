@@ -17,17 +17,17 @@ this.transition.setAmplitude(4);
 this.transition.setB(5);
 this.transition.startTransition();
 
-window.setInterval(function () {
-	'use strict';
-	this.transition.setAngle(0.6);
-	this.transition.setColor(this.transition.cellColors[this.transition.cycle % 3]);
-	this.transition.setHorizontalCenter(Math.floor(Math.random() * this.transition.columns));
-	this.transition.setVerticalCenter(Math.floor(Math.random() * this.transition.rows));
-	this.transition.setLag(0);
-	this.transition.startTransition();
-	this.transition.setVariance(0.2);
-	this.transition.cycle += 1;
-}, 2000);
+// window.setInterval(function () {
+// 	'use strict';
+// 	this.transition.setAngle(0.6);
+// 	this.transition.setColor(this.transition.cellColors[this.transition.cycle % 3]);
+// 	this.transition.setHorizontalCenter(Math.floor(Math.random() * this.transition.columns));
+// 	this.transition.setVerticalCenter(Math.floor(Math.random() * this.transition.rows));
+// 	this.transition.setLag(0);
+// 	this.transition.startTransition();
+// 	this.transition.setVariance(0.2);
+// 	this.transition.cycle += 1;
+// }, 2000);
 
 /*
 Body Systems Analogy
