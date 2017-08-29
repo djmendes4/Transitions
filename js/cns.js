@@ -5,7 +5,7 @@ this.transition = new Transition();
 this.handler = new Handler();
 
 this.transition.initialize(this.landscape);
-this.transition.setTransition(this.transition.transitionTypes.sinWave);
+this.transition.setTransition(this.transition.transitionTypes.sine);
 //console.log(this.transition.columns);
 //console.log(this.transition.rows);
 this.transition.setColor('grey');
