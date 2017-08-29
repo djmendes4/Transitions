@@ -207,7 +207,7 @@ var Transition = function () {
 		};
 		//console.log('User Defined Parameters:' + '\n\tPattern:\t\t\t' + this.parameters.transition + '\n\tDuration:\t\t\t' + this.parameters.duration + 'ms\n\tHorizontal Center:\t' + this.parameters.h + ' cells\n\tVertical Center:\t' + this.parameters.k + ' cells\n\tNoise(%):\t\t\t' + (this.parameters.variance * 100) + '%');
 
-		this.cellColors = ['blue', 'green', 'purple', 'grey', 'borderOnly', 'red'];
+		this.cellColors = ['blue', 'green', 'red', 'grey', 'borderOnly', 'red'];
 		this.cycle = 0;
 
 		this.transitionTypes = {
