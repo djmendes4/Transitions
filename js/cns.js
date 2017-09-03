@@ -1,20 +1,50 @@
-this.landscape = new Landscape();
-//this.dimensionalize = new Dimensionalize();
-this.raindrops = new Raindrops();
-this.transition = new Transition();
-this.handler = new Handler();
+var screen = new Screen({
+	parentElement: document.getElementById('container'),
+	screenID: 'guilegames_welcome',
+	width: screen.width / 96 * 2.54,
+	height: 480 / 96 * 2.54,
+	borderThickness: 3,
+	unitScalar: 100 * 96 / 32 / 2.54
+});
+screen.refresh();
 
-this.transition.initialize(this.landscape);
-this.transition.setTransition(this.transition.transitionTypes.linear);
-this.transition.setHorizontalCenter(74);
-this.transition.setVerticalCenter(34);
-this.transition.setColor('grey');
-this.transition.setAngle(0);
-this.transition.setVariance(0.1);
-this.transition.setDuration(3200);
-this.transition.setLag(0);
-this.transition.setAmplitude(4);
-this.transition.setB(5);
+var landscape = new Landscape(screen);
+landscape.initialize();
+
+var shape = new Shape();
+
+var transition1 = new Transition(landscape);
+transition1.setDuration(3000);
+transition1.setCenter(0, 0);
+transition1.setShape(shape.circle());
+transition1.initialize();
+
+var settings = new Settings({
+	parent: document.getElementById('container'),
+	screen: screen,
+	landscape: landscape
+});
+settings.initialize();
+
+//landscape.initialize();
+
+//this.landscape = new Landscape();
+////this.dimensionalize = new Dimensionalize();
+////this.raindrops = new Raindrops();
+//this.transition = new Transition();
+//this.handler = new Handler();
+//
+//this.transition.initialize(this.landscape);
+//this.transition.setTransition(this.transition.transitionTypes.linear);
+//this.transition.setHorizontalCenter(74);
+//this.transition.setVerticalCenter(34);
+//this.transition.setColor('grey');
+//this.transition.setAngle(0);
+//this.transition.setVariance(0.1);
+//this.transition.setDuration(3200);
+//this.transition.setLag(0);
+//this.transition.setAmplitude(4);
+//this.transition.setB(5);
 //this.transition.startTransition();
 //
 //window.setInterval(function () {
