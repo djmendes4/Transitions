@@ -15,9 +15,10 @@ var Transition = function (landscape) {
 
 		horizontalCenter = Math.floor(numberOfColumns / 2),
 		verticalCenter = Math.floor(numberOfRows / 2),
+		color = 'black',
 		duration = 3000,
 		variance = 0.125,
-		lag = 0,
+		delay = 0,
 		range = 0;
 
 	return {
@@ -32,6 +33,11 @@ var Transition = function (landscape) {
 		getVerticalCenter: function () {return verticalCenter; },
 		setVerticalCenter: function (number) {
 			verticalCenter = number;
+		},
+
+		getColor: function () {return color; },
+		setColor: function (string) {
+			color = string;
 		},
 
 		getCenter: function () {return [horizontalCenter, verticalCenter]; },
@@ -94,18 +100,18 @@ var Transition = function (landscape) {
 			//console.log('New variance: ' + number);
 		},
 
-		getLag: function () {return lag; },
-		setLag: function (number) {
+		getDelay: function () {return delay; },
+		setDelay: function (number) {
 			if (!isNaN(number)) {
 				if (number >= 0) {
-					lag = number;
+					delay = number;
 				} else {
 					throw new Error('\'Lag\' parameter value is negative');
 				}
 			} else {
-				throw new Error('Incorrect data type for \'lag\' parameter');
+				throw new Error('Incorrect data type for \'delay\' parameter');
 			}
-			//console.log('New Lag: ' + number);
+			//console.log('New delay: ' + number);
 		},
 
 		getShape: function () {return shape; },
@@ -145,22 +151,22 @@ var Transition = function (landscape) {
 			var x = 0,
 				y = 0,
 				noise = 0,
-				delay = 0,
+				time = 0,
 				value = 0;
 
 			for (x = 0; x < numberOfColumns; x += 1) {
 				for (y = 0; y < numberOfRows; y += 1) {
 					value = shapeFunction(x, y, this);
 					noise = Math.random() * variance;
-					delay = (((value / range) + noise) * duration) + lag;
+					time = (((value / range) + noise) * duration) + delay;
 //					console.log(delay);
 //					console.log(range);
 
 					setTimeout(this.updateCell.bind(this, {
 						x: x,
 						y: y,
-						color: 'blue'
-					}), delay);
+						color: color
+					}), time);
 				}
 			}
 		},

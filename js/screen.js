@@ -4,6 +4,7 @@ var Screen = function (screenProperties) {
 	'use strict';
 
 	var parentElement = screenProperties.parentElement || document.body,
+		thisElement = {},
 
 		screenID = screenProperties.screenID || '',
 		width = screenProperties.width || screen.width,
@@ -53,6 +54,10 @@ var Screen = function (screenProperties) {
 			this.refresh();
 		},
 
+		removeChild: function (element) {
+			thisElement.removeChild(element);
+		},
+
 		refresh: function () {
 			//console.log('Screen Attributes:');
 			//console.log('\t' + 'Parent ID: ' + parentElement.getAttribute('id'));
@@ -66,6 +71,7 @@ var Screen = function (screenProperties) {
 			newSVG.setAttribute('width', width + 'cm');
 			newSVG.setAttribute('height', height + 'cm');
 			newSVG.setAttribute('viewBox', ('0 0 ' + (width * unitScalar) + ' ' + (height * unitScalar)));
+			thisElement = newSVG;
 
 			fragment.appendChild(newSVG);
 			parentElement.insertBefore(fragment, parentElement.firstChild);
@@ -78,9 +84,9 @@ var Landscape = function (screen) {
 
 	var parentElement = document.getElementById(screen.getScreenID()),
 		tiles = [],
-		tileWidth = 100,
-		tileHeight = 100,
 		tileBorderThickness = 2.54 / 96 * screen.getUnitScalar(), //1px
+		tileWidth = 100 - tileBorderThickness,
+		tileHeight = 100 - tileBorderThickness,
 		numberOfRows = Math.ceil(screen.getHeight() * screen.getUnitScalar() / (tileHeight + tileBorderThickness)),
 		numberOfColumns = Math.ceil(screen.getWidth() * screen.getUnitScalar() / (tileWidth + tileBorderThickness));
 
@@ -127,8 +133,8 @@ var Landscape = function (screen) {
 			for (x = 0; x < numberOfColumns; x += 1) {
 				tiles[x] = [];
 				for (y = 0; y < numberOfRows; y += 1) {
-					translateX = x * (tileWidth + tileBorderThickness) - centerWidth;
-					translateY = y * (tileHeight + tileBorderThickness) - tileBorderThickness;
+					translateX = x * (tileWidth + tileBorderThickness);
+					translateY = y * (tileHeight + tileBorderThickness);
 
 					newSVGRect = document.createElementNS(svgns, 'rect');
 					newSVGRect.setAttribute('x', translateX);
@@ -137,7 +143,7 @@ var Landscape = function (screen) {
 					newSVGRect.setAttribute('height', tileHeight);
 					newSVGRect.setAttribute('id', x + ',' + y);
 					newSVGRect.setAttribute('class', 'cell t' + Math.floor(Math.random() * 5));
-					newSVGRect.setAttribute('color', 'grey');
+					newSVGRect.setAttribute('color', 'black');
 
 					tiles[x][y] = newSVGRect;
 
@@ -194,6 +200,119 @@ var Tile = function () {
 			//console.log('\t' + 'Tile Radius: ' + tileRadius);
 		}
 	};
+};
+
+var Elements = {
+
+	scoreCounter: function () {
+		'use strict';
+
+		var scoreBoard = {},
+			score = 0,
+			scoreText = {};
+
+		return {
+			getScoreBoard: function () {return scoreBoard; },
+			setScoreBoard: function (object) {
+
+			},
+
+			getScore: function () {return score; },
+			setScore: function (number) {
+				if (number !== null && !isNaN(number)) {
+					score = number;
+					this.updateScore();
+				}
+			},
+
+			generateScoreBoard: function () {
+				var parent = document.body,
+					newSection = document.createElement('section'),
+					newTextNode = document.createTextNode('');
+
+				scoreText = newTextNode;
+
+				newTextNode.nodeValue = '';
+				newSection.setAttribute('id', 'scoreBoard');
+
+				newSection.appendChild(newTextNode);
+				parent.insertBefore(newSection, parent.firstChild);
+			},
+
+			incrementScore: function () {
+				score += 1;
+				this.updateScore();
+			},
+
+			updateScore: function () {
+				var scoreAsString = math.pad(score, 6);
+
+				scoreText.nodeValue = scoreAsString;
+			},
+
+			main: function () {
+				this.generateScoreBoard();
+				this.updateScore();
+			}
+		};
+	},
+
+	gameOverInstance: {},
+	gameOver: function () {
+		'use strict';
+
+		var parent = {},
+			thisElement = {};
+
+		return {
+			generateGameOverScreen: function () {
+				var newSection = document.createElement('section'),
+					newTextNode = document.createTextNode('GAME OVER!');
+
+				newTextNode.nodeValue = '';
+				newSection.setAttribute('id', 'guilegames_gameover');
+				thisElement = newSection;
+
+				newSection.appendChild(newTextNode);
+				parent.insertBefore(newSection, parent.firstChild);
+			},
+
+			generateGameOverMessage: function () {
+				var newDiv = {},
+					newTextNode = {};
+
+				newDiv = document.createElement('div');
+				newDiv.setAttribute('id', 'gameover_messagebox');
+				thisElement.appendChild(newDiv);
+
+				newTextNode = document.createTextNode('GAME OVER!');
+				newDiv = document.createElement('div');
+				newDiv.setAttribute('id', 'gameover_message');
+				newDiv.appendChild(newTextNode);
+				document.getElementById('gameover_messagebox').appendChild(newDiv);
+
+				newDiv = document.createElement('div');
+				newDiv.setAttribute('id', 'gameover_restartbox');
+				thisElement.appendChild(newDiv);
+
+				newTextNode = document.createTextNode('press the Spacebar to start over');
+				newDiv = document.createElement('div');
+				newDiv.setAttribute('id', 'gameover_restart');
+				newDiv.appendChild(newTextNode);
+				document.getElementById('gameover_restartbox').appendChild(newDiv);
+			},
+
+			destroy: function () {
+				parent.removeChild(thisElement);
+			},
+
+			main: function () {
+				parent = document.getElementById('guilegames');
+				this.generateGameOverScreen();
+				this.generateGameOverMessage();
+			}
+		};
+	}
 };
 
 //translateX = x * (tileWidth + tileBorderThickness) - centerWidth;

@@ -16,10 +16,12 @@ var Settings = function (parameters) {
 		},
 
 		createInput: function (object) {
-			var input = document.createElement('input'),
+			var wrapper = document.createElement('div'),
+				input = document.createElement('input'),
 				parent = object.parent || this.getParent(),
 				type = object.type || null,
 				id = object.id || null,
+				group = object.group || null,
 				name = object.name || null,
 				text = object.text || null,
 				min = object.min || (object.min === 0 ? 0 : null),
@@ -41,11 +43,20 @@ var Settings = function (parameters) {
 			}
 
 			if (id !== null) {
-				console.log(id);
+//				console.log(id);
 				if (typeof (id) === 'string') {
 					input.setAttribute('id', id);
 				} else {
 					throw new Error('the id is not valid');
+				}
+			}
+
+			if (group !== null) {
+//				console.log(group);
+				if (typeof (group) === 'string') {
+					input.setAttribute('class', group);
+				} else {
+					throw new Error('the group name is not valid');
 				}
 			}
 
@@ -123,11 +134,23 @@ var Settings = function (parameters) {
 			case 'landscapeWidth+25':
 			case 'landscapeWidth+100':
 				newValue = Math.round((parseFloat(screen.getWidth()) + parseFloat(value)) * 100) / 100;
-
 //				console.log(parseFloat(screen.getWidth()) + ' + ' + parseFloat(value) + ' = ' + newValue);
-
 				screen.setWidth(newValue);
 				document.getElementById('landscapeWidth').setAttribute('value', newValue);
+				landscape.refresh();
+				break;
+			case 'landscapeHeight-100':
+			case 'landscapeHeight-25':
+			case 'landscapeHeight-5':
+			case 'landscapeHeight-1':
+			case 'landscapeHeight+1':
+			case 'landscapeHeight+5':
+			case 'landscapeHeight+25':
+			case 'landscapeHeight+100':
+				newValue = Math.round((parseFloat(screen.getHeight()) + parseFloat(value)) * 100) / 100;
+				console.log(parseFloat(screen.getHeight()) + ' + ' + parseFloat(value) + ' = ' + newValue);
+				screen.setHeight(newValue);
+				document.getElementById('landscapeHeight').setAttribute('value', newValue);
 				landscape.refresh();
 				break;
 			}
@@ -147,6 +170,7 @@ var Settings = function (parameters) {
 				parent: div.children[0],
 				type: 'button',
 				id: 'landscapeWidth-100',
+				group: 'landscape button left',
 				name: 'landscapeWidth-100',
 				value: -100,
 				text: '-100',
@@ -158,6 +182,7 @@ var Settings = function (parameters) {
 				parent: div.children[0],
 				type: 'button',
 				id: 'landscapeWidth-25',
+				group: 'landscape button left',
 				name: 'landscapeWidth-25',
 				value: -25,
 				text: '-25',
@@ -169,6 +194,7 @@ var Settings = function (parameters) {
 				parent: div.children[0],
 				type: 'button',
 				id: 'landscapeWidth-5',
+				group: 'landscape button left',
 				name: 'landscapeWidth-5',
 				value: -5,
 				text: '-5',
@@ -180,6 +206,7 @@ var Settings = function (parameters) {
 				parent: div.children[0],
 				type: 'button',
 				id: 'landscapeWidth-1',
+				group: 'landscape button left',
 				name: 'landscapeWidth-1',
 				value: -1,
 				text: '-1',
@@ -191,6 +218,7 @@ var Settings = function (parameters) {
 				parent: div.children[0],
 				type: 'number',
 				id: 'landscapeWidth',
+				group: 'landscape number',
 				name: 'landscapeWidth',
 				min: 0,
 				step: 0.001,
@@ -203,6 +231,7 @@ var Settings = function (parameters) {
 				parent: div.children[0],
 				type: 'button',
 				id: 'landscapeWidth+1',
+				group: 'landscape button right',
 				name: 'landscapeWidth+1',
 				value: 1,
 				text: '+1',
@@ -214,6 +243,7 @@ var Settings = function (parameters) {
 				parent: div.children[0],
 				type: 'button',
 				id: 'landscapeWidth+5',
+				group: 'landscape button right',
 				name: 'landscapeWidth+5',
 				value: 5,
 				text: '+5',
@@ -225,6 +255,7 @@ var Settings = function (parameters) {
 				parent: div.children[0],
 				type: 'button',
 				id: 'landscapeWidth+25',
+				group: 'landscape button right',
 				name: 'landscapeWidth+25',
 				value: 25,
 				text: '+25',
@@ -236,6 +267,7 @@ var Settings = function (parameters) {
 				parent: div.children[0],
 				type: 'button',
 				id: 'landscapeWidth+100',
+				group: 'landscape button right',
 				name: 'landscapeWidth+100',
 				value: 100,
 				text: '+100',
@@ -247,13 +279,111 @@ var Settings = function (parameters) {
 			div.children[1].setAttribute('id', 'landscapeHeight');
 			this.createInput({
 				parent: div.children[1],
+				type: 'button',
+				id: 'landscapeHeight-100',
+				group: 'landscape button',
+				name: 'landscapeHeight-100',
+				value: -100,
+				text: '-100',
+				listener: {
+					type: 'click'
+				}
+			});
+			this.createInput({
+				parent: div.children[1],
+				type: 'button',
+				id: 'landscapeHeight-25',
+				group: 'landscape button',
+				name: 'landscapeHeight-25',
+				value: -25,
+				text: '-25',
+				listener: {
+					type: 'click'
+				}
+			});
+			this.createInput({
+				parent: div.children[1],
+				type: 'button',
+				id: 'landscapeHeight-5',
+				group: 'landscape button',
+				name: 'landscapeHeight-5',
+				value: -5,
+				text: '-5',
+				listener: {
+					type: 'click'
+				}
+			});
+			this.createInput({
+				parent: div.children[1],
+				type: 'button',
+				id: 'landscapeHeight-1',
+				group: 'landscape button',
+				name: 'landscapeHeight-1',
+				value: -1,
+				text: '-1',
+				listener: {
+					type: 'click'
+				}
+			});
+			this.createInput({
+				parent: div.children[1],
 				type: 'number',
+				id: 'landscapeHeight',
+				group: 'landscape number',
 				name: 'landscapeHeight',
 				min: 0,
 				step: 0.001,
 				value: screen.getHeight(),
 				listener: {
 					type: 'input'
+				}
+			});
+			this.createInput({
+				parent: div.children[1],
+				type: 'button',
+				id: 'landscapeHeight+1',
+				group: 'landscape button',
+				name: 'landscapeHeight+1',
+				value: 1,
+				text: '+1',
+				listener: {
+					type: 'click'
+				}
+			});
+			this.createInput({
+				parent: div.children[1],
+				type: 'button',
+				id: 'landscapeHeight+5',
+				group: 'landscape button',
+				name: 'landscapeHeight+5',
+				value: 5,
+				text: '+5',
+				listener: {
+					type: 'click'
+				}
+			});
+			this.createInput({
+				parent: div.children[1],
+				type: 'button',
+				id: 'landscapeHeight+25',
+				group: 'landscape button',
+				name: 'landscapeHeight+25',
+				value: 25,
+				text: '+25',
+				listener: {
+					type: 'click'
+				}
+			});
+			this.createInput({
+				parent: div.children[1],
+				type: 'button',
+				id: 'landscapeHeight+100',
+				group: 'landscape button',
+				name: 'landscapeHeight+100',
+				value: 100,
+				text: '+100',
+				listener: {
+					type: 'click'
 				}
 			});
 

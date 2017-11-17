@@ -1,6 +1,32 @@
 /*jslint devel: true */
 
 var math = {
+	pixelToCentimeter: function (numberOfPixels) {
+		'use strict';
+
+		var centimeters = 0,
+			unitScalar = 2.54 / 96;
+
+		if (numberOfPixels !== null && !isNaN(numberOfPixels)) {
+			centimeters = numberOfPixels * unitScalar;
+			console.log(centimeters);
+			return centimeters;
+		} else {
+			throw new Error('The argument entered is not a number.');
+		}
+	},
+
+	pad: function (integer, length) {
+		'use strict';
+		var integerAsString = integer.toString();
+
+		while (integerAsString.length < length) {
+			integerAsString = '0' + integerAsString;
+		}
+
+		return integerAsString;
+	},
+
 	matrixMultiplication: function (array1, array2) {
 		'use strict';
 

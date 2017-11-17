@@ -12,16 +12,94 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
   margin: 0;
 }
 
-#container {
+.landscape.button {
+	width: 32px;
+	height: 32px;
+
+	padding: 0px;
+	margin: 0px auto;
+
+	border-width: 1px;
+	border-color: transparent;
+	border-style: solid;
+	border-radius: 16px;
+
+	background-color: rgba(128, 128, 128, 0.2);
+
+	font-weight: bold;
+	color: black;
+
+	-webkit-transition-duration: 0.4s;
+	transition-duration: 0.4s;
+}
+
+.landscape.button:hover {
+	background-color: rgba(0, 0, 0, 0.4); }
+
+#guilegames {
 	position: relative;
-	top: 60px;
 }
 
 #guilegames_welcome {
 	background-color: black;
 	display: block;
-	margin: 0px auto 10px auto;
-	box-shadow: 0px 0px 0px 4px white;
+	margin: 0px auto;
+	box-shadow: 0px 0px 2px 4px black;
+}
+
+.button.increment {
+	width: 32px;
+	height: 32px;
+	border: none;
+/*	box-shadow: 0px 0px 0px 2px black, inset 0px 0px 2px 1px rgba(256, 256, 256, 0.125);*/
+	box-shadow: 1px 1px 4px 2px rgba(0, 0, 0, 0.8), -1px -1px 2px 2px rgba(63, 67, 76, 0.8);
+	background-color: rgba(28, 30, 35, 0.66);
+	border-radius: 16px;
+	text-align: center;
+	color: white;
+	font-weight: bold;
+}
+
+.button.increment:hover {
+	transition-duration: 0.25s;
+	-webkit-transition-duration: 0.25s;
+	box-shadow: 0px 0px 0px 2px rgba( 63, 67, 76,1), inset 0px 0px 2px 1px rgba(92, 97, 110, 0.66);
+	background-color: rgba(28, 30, 35, 1);
+}
+
+section#layer1 {
+	width: 512px;
+	position: relative;
+	margin: 0 auto;
+}
+
+section.middle {
+	position: relative;
+	width:256px;
+	margin: 0 auto;
+}
+
+section.leftside {
+	position: absolute;
+	width: 32px;
+	height: 32px;
+	top: 0px;
+	left: -32px;
+	text-align: center;
+}
+
+section.rightside {
+	position: absolute;
+	width: 64px;
+	height: 32px;
+	top: 0px;
+	right: -100px;
+	text-align: center;
+}
+
+p {
+	margin: 0px;
+	padding: 0px;
 }
 
 /*--- Clear ---*/
@@ -37,6 +115,8 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 [color='none'].t3 { background-color: rgba(255, 255, 255, 1.0); z-index: 20000; }
 [color='none'].t4 { background-color: rgba(255, 255, 255, 1.0); z-index: 20000; }
 
+[color='black'].t0, [color='black'].t1, [color='black'].t2, [color='black'].t3, [color='black'].t4 { background-color: rgba(0, 0, 0, 1.0); z-index: 20000; }
+
 /*--- Purple ---*/
 [color='purple'].t0 { background-color: #552470; z-index: 20000; fill: #552470; }
 [color='purple'].t1 { background-color: #73428F; z-index: 20000; fill: #73428F; }
@@ -51,23 +131,100 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 [color='grey'].t3 { background-color: #3C403E; z-index: 20000; fill: #3C403E; }
 [color='grey'].t4 { background-color: #262928; z-index: 20000; fill: #262928; }
 
+/*--- Brown ---*/
+[color='brown'].t0 { background-color: #BE8351; z-index: 20000; fill: #BE8351; }
+[color='brown'].t1 { background-color: #A06534; z-index: 20000; fill: #A06534; }
+[color='brown'].t2 { background-color: #824A1C; z-index: 20000; fill: #824A1C; }
+[color='brown'].t3 { background-color: #64330B; z-index: 20000; fill: #64330B; }
+[color='brown'].t4 { background-color: #482100; z-index: 20000; fill: #482100; }
+
 /*--- Red ---*/
-[color='red'].t0 { background-color: #BF0909 }
-[color='red'].t1 { background-color: #EF2929 }
-[color='red'].t2 { background-color: #DD0F0F }
-[color='red'].t3 { background-color: #A90101 }
-[color='red'].t4 { background-color: #920000 }
+[color='red'].t0 { background-color: #C53737; z-index: 20000; fill: #C53737; }
+[color='red'].t1 { background-color: #A32222; z-index: 20000; fill: #A32222; }
+[color='red'].t2 { background-color: #7E0C0C; z-index: 20000; fill: #7E0C0C; }
+[color='red'].t3 { background-color: #540000; z-index: 20000; fill: #540000; }
+[color='red'].t4 { background-color: #330000; z-index: 20000; fill: #330000; }
+
+/*--- Yellow ---*/
+[color='yellow'].t0 { background-color: #FFFF55; z-index: 20000; fill: #FFFF55; }
+[color='yellow'].t1 { background-color: #FFFF25; z-index: 20000; fill: #FFFF25; }
+[color='yellow'].t2 { background-color: #DBDB00; z-index: 20000; fill: #DBDB00; }
+[color='yellow'].t3 { background-color: #ABAB00; z-index: 20000; fill: #ABAB00; }
+[color='yellow'].t4 { background-color: #767600; z-index: 20000; fill: #767600; }
 
 /*--- Blue ---*/
-[color='blue'].t0 { background-color: #051745; z-index: 20000; fill: #051745; }
-[color='blue'].t1 { background-color: #06102B; z-index: 20000; fill: #06102B; }
-[color='blue'].t2 { background-color: #041235; z-index: 20000; fill: #041235; }
-[color='blue'].t3 { background-color: #092468; z-index: 20000; fill: #092468; }
-[color='blue'].t4 { background-color: #0B308E; z-index: 20000; fill: #0B308E; }
+[color='blue'].t0 { background-color: #3E527F; z-index: 20000; fill: #3E527F; }
+[color='blue'].t1 { background-color: #2A3E6B; z-index: 20000; fill: #2A3E6B; }
+[color='blue'].t2 { background-color: #1A2C57; z-index: 20000; fill: #1A2C57; }
+[color='blue'].t3 { background-color: #0E1E43; z-index: 20000; fill: #0E1E43; }
+[color='blue'].t4 { background-color: #051230; z-index: 20000; fill: #051230; }
 
 /*--- Green ---*/
-[color='green'].t0 { background-color: rgba(37, 132, 27, 1.0); fill: rgba(37, 132, 27, 1.0);}
-[color='green'].t1 { background-color: #28B719; fill: #28B719; }
-[color='green'].t2 { background-color: #28991C; fill: #28991C; }
-[color='green'].t3 { background-color: #1A6712; fill: #1A6712; }
-[color='green'].t4 { background-color: #1A5913; fill: #1A5913; }
+[color='green'].t0 { background-color: #419841; fill: #419841; }
+[color='green'].t1 { background-color: #298029; fill: #298029; }
+[color='green'].t2 { background-color: #176817; fill: #176817; }
+[color='green'].t3 { background-color: #095009; fill: #095009; }
+[color='green'].t4 { background-color: #003900; fill: #003900; }
+
+#scoreBoard {
+	width: 160px;
+	height: 40px;
+	position: relative;
+	margin: 20px auto;
+	border-radius: 20px;
+	background-color: white;
+	font-size: 34px;
+	font-weight: bold;
+	font-family: monospace;
+	text-align: center;
+}
+
+#guilegames_gameover {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.4);
+	overflow: hidden;
+}
+
+#gameover_messagebox {
+	position: absolute;
+	width: 100%;
+	height: 128px;
+	top: 128px;
+	background-color: rgba(0, 5, 10, 0.8);
+	box-shadow: 0px 0px 12px 6px black;
+}
+
+#gameover_message {
+	position: relative;
+	width: 100%;
+	margin: 45px 0px;
+	text-align: center;
+	color: rgba(220, 240, 255, 0.8);
+	font-family: monospace;
+	font-weight: bold;
+	font-size: 32px;
+}
+
+#gameover_restartbox {
+	position: absolute;
+	bottom: -5px;
+	width: 100%;
+	height: 37px;
+}
+
+#gameover_restart {
+	position: relative;
+	width: 512px;
+	height: 100%;
+	margin: 0px auto;
+	background-color: rgba(0, 5, 10, 0.8);
+	box-shadow: 0px 0px 12px 6px black;
+	color: rgba(220, 240, 255, 0.8);
+	font-family: monospace;
+	font-weight: bold;
+	font-size: 16px;
+	text-align: center;
+	padding-top: 5px;
+}

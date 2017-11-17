@@ -1,0 +1,30 @@
+{ "mender": {
+		"name": "mender",
+		"fill": "green",
+		"hitBoxRadius": "40"
+	},
+
+	"marauder": {
+		"name": "marauder",
+		"fill": "red",
+		"hitBoxRadius": "48"
+	},
+
+	"guardian": {
+		"name": "guardian",
+		"fill": "brown",
+		"hitBoxRadius": "64"
+	},
+
+	"marksman": {
+		"name": "marksman",
+		"fill": "yellow",
+		"hitBoxRadius": "48"
+	},
+
+	"spiritualist": {
+		"name": "spiritualist",
+		"fill": "blue",
+		"hitBoxRadius": "40"
+	}
+}
