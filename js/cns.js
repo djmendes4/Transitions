@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 var screen = new Screen({
 	parentElement: document.getElementById('guilegames'),
 	screenID: 'guilegames_welcome',
@@ -146,38 +145,37 @@ var bindings = new Bindings();
 
 var animate = new Animate();
 animate.startAnimation();
-=======
-this.landscape = new Landscape();
+
+//this.landscape = new Landscape();
 //this.dimensionalize = new Dimensionalize();
 //this.raindrops = new Raindrops();
-this.transition = new Transition();
-this.handler = new Handler();
+//this.transition = new Transition();
+//this.handler = new Handler();
 
-this.transition.initialize(this.landscape);
-this.transition.setTransition(this.transition.transitionTypes.sine);
-//console.log(this.transition.columns);
-//console.log(this.transition.rows);
-this.transition.setColor('grey');
-this.transition.setAngle(0);
-this.transition.setVariance(0.1);
-this.transition.setDuration(3200);
-this.transition.setLag(0);
-this.transition.setAmplitude(4);
-this.transition.setB(5);
-this.transition.startTransition();
-
-window.setInterval(function () {
-	'use strict';
-	this.transition.setAngle(0.6);
-	this.transition.setColor(this.transition.cellColors[this.transition.cycle % 2]);
-	this.transition.setHorizontalCenter(Math.floor(Math.random() * this.transition.columns));
-	this.transition.setVerticalCenter(Math.floor(Math.random() * this.transition.rows));
-	this.transition.setLag(0);
-	this.transition.startTransition();
-	this.transition.setVariance(0.2);
-	this.transition.cycle += 1;
-}, 2000);
->>>>>>> origin/gh-pages
+//this.transition.initialize(this.landscape);
+//this.transition.setTransition(this.transition.transitionTypes.sine);
+////console.log(this.transition.columns);
+////console.log(this.transition.rows);
+//this.transition.setColor('grey');
+//this.transition.setAngle(0);
+//this.transition.setVariance(0.1);
+//this.transition.setDuration(3200);
+//this.transition.setLag(0);
+//this.transition.setAmplitude(4);
+//this.transition.setB(5);
+//this.transition.startTransition();
+//
+//window.setInterval(function () {
+//	'use strict';
+//	this.transition.setAngle(0.6);
+//	this.transition.setColor(this.transition.cellColors[this.transition.cycle % 2]);
+//	this.transition.setHorizontalCenter(Math.floor(Math.random() * this.transition.columns));
+//	this.transition.setVerticalCenter(Math.floor(Math.random() * this.transition.rows));
+//	this.transition.setLag(0);
+//	this.transition.startTransition();
+//	this.transition.setVariance(0.2);
+//	this.transition.cycle += 1;
+//}, 2000);
 
 /*
 Body Systems Analogy
