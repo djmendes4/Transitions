@@ -4,86 +4,185 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 }
 
 #title {
-	width: 80%;
-	margin: 0px auto;
-	height: 100px;
-	position: absolute;
-	left: 10%;
-	top: -8px;
-	border-radius: 8px;
-	background-color: rgba(19, 25, 37, 1);
-	box-shadow: 0px 0px 6px 2px rgba(0, 0, 0, 0.5), 0px 0px 16px -2px rgba(119, 125, 138, 0.2) inset;
-	border: 1px solid black;
+  width: 80%;
+  height: 100px;
+  margin-bottom: -124px;
+  border-radius: 8px;
+  background-color: rgba(19, 25, 37, 1);
+  box-shadow: 0px 0px 6px 2px rgba(0, 0, 0, 0.5), 0px 0px 16px -2px rgba(119, 125, 138, 0.2) inset;
+  border: 1px solid black;
+  display: flex;
+  order: 1;
+  padding: 16px;
 }
 
 #settings-Menu {
-	width: 80%;
-	height: 200px;
-	background-color: rgba(19, 25, 37, 1);
-	border-radius: 8px;
-	margin: 0px auto;
-	position: absolute;
-	left:10%;
-	bottom: -8px;
-	box-shadow: 0px 0px 6px 2px rgba(0, 0, 0, 0.5), 0px 0px 16px -2px rgba(119, 125, 138, 0.2) inset;
-	border: 1px solid black;
-	transition: all ease-out 0.6s;
+  width: 80%;
+  height: 200px;
+  display: flex;
+  background-color: rgba(19, 25, 37, 1);
+  border-radius: 8px;
+  box-shadow: 0px 0px 6px 2px rgba(0, 0, 0, 0.5), 0px 0px 16px -2px rgba(119, 125, 138, 0.2) inset;
+  border: 1px solid black;
+  transition: all ease-out 0.6s;
+  margin-top: -224px;
+  order: 3;
+  padding: 16px;
 }
 
 #settings-toggle {
-	background-color: white;
-	background: url(../assets/arrow.png) center bottom 2px no-repeat;
-	background-size: 36%;
-	width: 8%;
-	height: 24px;
-	position: absolute;
-	left: 46%;
-	bottom: -12px;
-	border-radius: 8px;
-	border: 1px solid black;
-	background-color: rgba(19, 25, 37, 1);
-	box-shadow: 0px 0px 6px 2px rgba(0, 0, 0, 0.5), 0px 0px 8px 0px rgba(75, 81, 93, 0.2) inset;
-	opacity: 1.0;
-	transition: opacity ease-out 0.6s;
+  background-color: white;
+  background: url(../assets/arrow.png) center bottom 2px no-repeat;
+  background-size: 36%;
+  width: 8%;
+  height: 40px;
+  position: absolute;
+  left: 46%;
+  bottom: -16px;
+  border-radius: 8px;
+  border: 1px solid black;
+  background-color: rgba(19, 25, 37, 1);
+  box-shadow: 0px 0px 6px 2px rgba(0, 0, 0, 0.5), 0px 0px 8px 0px rgba(75, 81, 93, 0.2) inset;
+  opacity: 1.0;
+  transition: opacity ease-out 0.6s;
 }
 
-#settings-toggle[tempt] {
-	background-color: rgba(8, 13, 27, 1);
-	box-shadow: 0px 0px 6px 2px rgba(0, 0, 0, 0.5), 0px 0px 8px 0px rgba(75, 81, 93, 0.2) inset;
-	transition: all ease-out 0.16s;
+#settings-toggle:hover {
+  background-color: rgba(8, 13, 27, 1);
+  box-shadow: 0px 0px 6px 2px rgba(0, 0, 0, 0.5), 0px 0px 8px 0px rgba(75, 81, 93, 0.2) inset;
+  transition: all ease-out 0.24s;
 }
 
 #settings-toggle[state="1"] {
-	visibility: hidden;
-	opacity: 0;
-	transition: all ease-out 0.6s;
+  opacity: 0;
+  transition: all ease-out 0.6s;
 }
 
 #settings-toggle[state="2"] {
-	top: 6px;
-	opacity: 1.0;
-	transition: opacity ease-out 0.6s;
-	transform: scaleY(-1);
-	background-position: center bottom 7px;
+  height: 32px;
+  opacity: 1.0;
+  transition: opacity ease-out 0.6s;
+  transform: scaleY(-1);
+  background-position: center bottom 7px;
 }
 
 #settings-toggle[state="3"] {
-	visibility: hidden;
-	opacity: 0;
-	transform: scaleY(-1);
-	background-position: center bottom 7px;
-	top:6px;
-	transition: all ease-out 0.6s;
+  opacity: 0;
+  transform: scaleY(-1);
+  background-position: center bottom 7px;
+  transition: opacity ease-out 0.6s;
 }
 
 #settings-Menu[tempt] {
-	box-shadow: 0px 0px 6px 2px rgba(0, 0, 0, 0.5), 0px 0px 12px 0px rgba(75, 81, 93, 0.5) inset;
-	bottom: -16px;
-	transition: all ease-out 0.16s;
+  box-shadow: 0px 0px 6px 2px rgba(0, 0, 0, 0.5), 0px 0px 12px 0px rgba(75, 81, 93, 0.5) inset;
+  bottom: -16px;
+  transition: all ease-out 0.16s;
 }
 
 #settings-Menu[lowered] {
-	box-shadow: 0px 0px 6px 2px rgba(0, 0, 0, 0.5), 0px 0px 12px 0px rgba(75, 81, 93, 0.2) inset;
-	bottom: -187px;
-	transition: all ease-out 0.5s;
+  box-shadow: 0px 0px 6px 2px rgba(0, 0, 0, 0.5), 0px 0px 12px 0px rgba(75, 81, 93, 0.2) inset;
+  margin-top: -8px;
+  transition: all ease-out 0.5s;
+}
+
+/* Menu Flexbox Settings */
+
+#settings-Screen, #settings-Landscape, #settings-Transition {
+  width: 120px;
+  height: 160px;
+  background-color: rgba(28, 36, 54, 1.00);
+  border-radius: 5px;
+  padding: 8px;
+  margin: 8px;
+  box-shadow: 0px 0px 6px 2px rgba(0, 0, 0, 0.5), 0px 0px 12px 0px rgba(75, 81, 93, 0.2) inset;
+  flex: 1 120px;
+}
+
+div.option {
+  height: 24px;
+
+  display: flex;
+  flex: 1;
+
+  margin: 8px;
+}
+
+div.option > label, div.option > input, div.option > button, div.option > select {
+  height: 100%;
+  width: 100%;
+
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+  justify-content: center;
+
+  background-color: white;
+  border: 2px solid black;
+  border-radius: 8px;
+  padding: 0px;
+
+  text-align: center;
+  font-family: Helvetica, Arial, sans-serif;
+  font-variant: small-caps;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+div.option > input {
+  margin-left: 4px;
+
+  cursor: pointer;
+}
+
+div.option > input:focus {
+  outline: none;
+}
+
+div.option[name="transition-center"] > input {
+  flex-basis: calc(25% - 4px);
+}
+
+div.option[name="transition-center"] > label {
+  flex-basis: 50%;
+}
+
+div.tooltip {
+  width: 0px;
+  height: 0px;
+
+  display: none;
+  position: relative;
+  opacity: 0.00;
+}
+
+div.tooltip[enable] {
+  display: flex;
+  opacity: 0.00;
+
+  transition: opacity ease-out 0.4s;
+}
+
+div.tooltip[tooltip] {
+  opacity: 1;
+}
+
+div.tooltip > div{
+  width: 96px;
+  
+  position: absolute;
+  left: 4px;
+
+  align-items: flex-start;
+  justify-content: center;
+
+  background-color: rgba(255, 255, 255, 0.6);
+  border: 2px solid black;
+  border-radius: 8px;
+  padding: 8px;
+
+  text-align: center;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 14px;
+
+  cursor: default;
 }
